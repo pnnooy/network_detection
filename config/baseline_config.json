@@ -1,0 +1,26 @@
+{
+  "_comment": "基线阈值配置 —— 由姜新晨维护，可根据实验环境调整",
+  "port_scan": {
+    "time_window_sec": 60,
+    "unique_dst_port_threshold": 20,
+    "description": "60秒内访问超过20个不同目标端口视为端口扫描"
+  },
+  "connection_rate": {
+    "time_window_sec": 60,
+    "max_connections_per_ip": 100,
+    "description": "单IP在60秒内最大并发连接数"
+  },
+  "external_connection": {
+    "internal_networks": ["192.168.0.0/16", "10.0.0.0/8", "172.16.0.0/12"],
+    "description": "内网IP段定义，访问不在此范围内的公网IP视为外联"
+  },
+  "lateral_movement": {
+    "time_window_sec": 300,
+    "internal_dst_count_threshold": 10,
+    "description": "5分钟内访问超过10个不同内网IP视为横向扩散"
+  },
+  "session_duration": {
+    "max_session_sec": 3600,
+    "description": "单会话最大时长，超过视为异常长连接"
+  }
+}
