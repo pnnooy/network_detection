@@ -242,7 +242,7 @@
     "protocol": "UDP",
     "direction": "request",
     "flags": "",
-    "payload": "\u0000\u0001\u0000\u0000",
+    "payload": "\\x00\\x01\\x00\\x00",
     "payload_len": 4,
     "flow_id": "192.168.1.10:54001->8.8.8.8:53/UDP"
   },
@@ -255,7 +255,7 @@
     "protocol": "UDP",
     "direction": "response",
     "flags": "",
-    "payload": "\u0000\u0001",
+    "payload": "\\x00\\x01\\x81\\x80",
     "payload_len": 4,
     "flow_id": "8.8.8.8:53->192.168.1.10:54001/UDP"
   },
@@ -1360,7 +1360,7 @@
     "protocol": "TCP",
     "direction": "request",
     "flags": "PA",
-    "payload": "\u0016\u0003\u0001\u0000\u0005\u0001\u0000\u0000\u0001\u0003",
+    "payload": "\\x16\\x03\\x01\\x00\\x05\\x01\\x00\\x00\\x01\\x03",
     "payload_len": 10,
     "flow_id": "192.168.1.55:52341->203.0.113.99:443/TCP"
   },
@@ -1399,8 +1399,8 @@
     "protocol": "TCP",
     "direction": "request",
     "flags": "PA",
-    "payload": "\u0016\u0003\u0001\u0000\u0001\u0000\u0000{\u0003\u0003",
-    "payload_len": 132,
+    "payload": "\\x16\\x03\\x01\\x00\\x7f\\x01\\x00\\x00{\\x03\\x03",
+    "payload_len": 11,
     "flow_id": "192.168.1.10:51200->192.168.1.20:443/TCP"
   }
 ]

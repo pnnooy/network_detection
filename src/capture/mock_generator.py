@@ -11,7 +11,7 @@ import json
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from .protocol_parser import build_flow_id
+from .protocol_parser import build_flow_id, encode_payload
 
 
 def _ts(base: datetime, offset_ms: int) -> str:
@@ -111,11 +111,13 @@ def generate_mock_packets() -> list[dict]:
             direction=direction, flags=flags, payload=body,
         ))
 
-    # 补充正常 UDP DNS 与 ICMP
+    # 补充正常 UDP DNS 与 ICMP（二进制 payload 使用 \xNN 转义，与真实抓包输出一致）
+    dns_req_payload, dns_req_len = encode_payload(bytes([0x00, 0x01, 0x00, 0x00]))
     add(_pkt(base, offset, "192.168.1.10", 54001, "8.8.8.8", 53, "UDP",
-             direction="request", payload="\x00\x01\x00\x00", payload_len=4))
+             direction="request", payload=dns_req_payload, payload_len=dns_req_len))
+    dns_rsp_payload, dns_rsp_len = encode_payload(bytes([0x00, 0x01, 0x81, 0x80]))
     add(_pkt(base, offset, "8.8.8.8", 53, "192.168.1.10", 54001, "UDP",
-             direction="response", payload="\x00\x01\x81\x80", payload_len=4))
+             direction="response", payload=dns_rsp_payload, payload_len=dns_rsp_len))
     add(_pkt(base, offset, "192.168.1.10", None, "192.168.1.20", None, "ICMP",
              direction="request", payload="", payload_len=0))
     add(_pkt(base, offset, "192.168.1.20", None, "192.168.1.10", None, "ICMP",
@@ -218,26 +220,31 @@ def generate_mock_packets() -> list[dict]:
     # ------------------------------------------------------------------
     # 7. 内网主机异常外联陌生公网IP (>=3条)
     # ------------------------------------------------------------------
+    tls_beacon_payload, tls_beacon_len = encode_payload(
+        bytes([0x16, 0x03, 0x01, 0x00, 0x05, 0x01, 0x00, 0x00, 0x01, 0x03])
+    )
     external_targets = [
-        ("203.0.113.99", 443, "request", "PA", "\x16\x03\x01\x00\x05\x01\x00\x00\x01\x03"),
-        ("198.51.100.42", 443, "request", "S", ""),
-        ("203.0.113.55", 8080, "request", "PA", "GET /beacon HTTP/1.1"),
+        ("203.0.113.99", 443, "request", "PA", tls_beacon_payload, tls_beacon_len),
+        ("198.51.100.42", 443, "request", "S", "", 0),
+        ("203.0.113.55", 8080, "request", "PA", "GET /beacon HTTP/1.1", None),
     ]
-    for i, (dst, port, direction, flags, payload) in enumerate(external_targets):
-        plen = len(payload.encode("utf-8")) if payload else 0
+    for i, (dst, port, direction, flags, payload, plen) in enumerate(external_targets):
+        kwargs = {"payload_len": plen} if plen is not None else {}
         add(_pkt(
             base, 120000 + i * 5000,
             "192.168.1.55", 52341 + i, dst, port, "TCP",
-            direction=direction, flags=flags, payload=payload, payload_len=plen,
+            direction=direction, flags=flags, payload=payload, **kwargs,
         ))
 
     # 额外一条正常 HTTPS（不应触发异常外联以外的告警）
+    tls_hello_payload, tls_hello_len = encode_payload(
+        bytes([0x16, 0x03, 0x01, 0x00, 0x7F, 0x01, 0x00, 0x00, 0x7B, 0x03, 0x03])
+    )
     add(_pkt(
         base, 130000,
         "192.168.1.10", 51200, "192.168.1.20", 443, "TCP",
         direction="request", flags="PA",
-        payload="\x16\x03\x01\x00\x7f\x01\x00\x00\x7b\x03\x03",
-        payload_len=132,
+        payload=tls_hello_payload, payload_len=tls_hello_len,
     ))
 
     packets.sort(key=lambda p: p["timestamp"])
