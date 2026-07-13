@@ -1,4 +1,4 @@
-"""告警汇总模块单元测试 —— 韩宇飞"""
+"""告警汇总与行为关联模块单元测试 —— 韩宇飞"""
 
 import json
 import tempfile
@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.gui_alert.aggregator import aggregate, save_merged
+from src.gui_alert.aggregator import aggregate, correlate_behaviors, save_merged
 
 
 class TestAggregator:
@@ -23,8 +23,7 @@ class TestAggregator:
         assert result == []
 
     def test_aggregate_multiple_files(self):
-        """多个告警文件正确合并排序"""
-        # 创建临时告警文件
+        """多个告警文件正确合并排序，并填充 behavior_id"""
         with tempfile.TemporaryDirectory() as tmpdir:
             alerts_a = [
                 {
@@ -64,9 +63,12 @@ class TestAggregator:
 
             result = aggregate([str(fa), str(fb)])
             assert len(result) == 2
-            # 按 timestamp 排序，b 的时间更早应排前面
             assert result[0]["alert_id"] == "b-1"
             assert result[1]["alert_id"] == "a-1"
+            # 每条告警都有 behavior_id
+            for alert in result:
+                assert "behavior_id" in alert
+                assert alert["behavior_id"] is not None
 
     def test_aggregate_deduplication(self):
         """相同 alert_id 去重"""
@@ -91,3 +93,135 @@ class TestAggregator:
 
             result = aggregate([str(fa), str(fb)])
             assert len(result) == 1
+
+
+class TestBehaviorCorrelation:
+    """correlate_behaviors() 测试"""
+
+    def test_same_source_same_category_merged(self):
+        """同源同类时间相近 → 同一 behavior_id"""
+        alerts = [
+            {
+                "alert_id": "1",
+                "detector": "signature",
+                "category": "SQL注入",
+                "src_ip": "10.0.0.1",
+                "dst_ip": "10.0.0.2",
+                "dst_port": 80,
+                "severity": "high",
+                "description": "SQL注入行为1",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:00",
+            },
+            {
+                "alert_id": "2",
+                "detector": "signature",
+                "category": "SQL注入",
+                "src_ip": "10.0.0.1",
+                "dst_ip": "10.0.0.2",
+                "dst_port": 80,
+                "severity": "high",
+                "description": "SQL注入行为2",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:30",
+            },
+        ]
+        result = correlate_behaviors(alerts)
+        assert result[0]["behavior_id"] == result[1]["behavior_id"]
+
+    def test_different_source_separated(self):
+        """不同源 → 不同 behavior_id"""
+        alerts = [
+            {
+                "alert_id": "1",
+                "detector": "signature",
+                "category": "SQL注入",
+                "src_ip": "10.0.0.1",
+                "dst_ip": "10.0.0.2",
+                "dst_port": 80,
+                "severity": "high",
+                "description": "SQL注入",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:00",
+            },
+            {
+                "alert_id": "2",
+                "detector": "signature",
+                "category": "SQL注入",
+                "src_ip": "10.0.0.99",
+                "dst_ip": "10.0.0.3",
+                "dst_port": 80,
+                "severity": "high",
+                "description": "SQL注入",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:15",
+            },
+        ]
+        result = correlate_behaviors(alerts)
+        assert result[0]["behavior_id"] != result[1]["behavior_id"]
+
+    def test_time_gap_exceeds_window_separated(self):
+        """时间间隔超出窗口 → 不同 behavior_id"""
+        alerts = [
+            {
+                "alert_id": "1",
+                "detector": "anomaly",
+                "category": "端口扫描",
+                "src_ip": "10.0.0.1",
+                "dst_ip": "10.0.0.2",
+                "dst_port": None,
+                "severity": "high",
+                "description": "扫描1",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:00",
+            },
+            {
+                "alert_id": "2",
+                "detector": "anomaly",
+                "category": "端口扫描",
+                "src_ip": "10.0.0.1",
+                "dst_ip": "10.0.0.2",
+                "dst_port": None,
+                "severity": "high",
+                "description": "扫描2",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:05:00",  # 5分钟间隔
+            },
+        ]
+        result = correlate_behaviors(alerts, time_window_sec=60)
+        assert result[0]["behavior_id"] != result[1]["behavior_id"]
+
+    def test_preserve_existing_behavior_id(self):
+        """已有 behavior_id 的告警保持原值不覆盖"""
+        alerts = [
+            {
+                "alert_id": "1",
+                "behavior_id": "preset-1",
+                "detector": "bruteforce",
+                "category": "暴力破解",
+                "src_ip": "10.0.0.5",
+                "dst_ip": "10.0.0.10",
+                "dst_port": 22,
+                "severity": "medium",
+                "description": "暴力破解",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:00",
+            },
+            {
+                "alert_id": "2",
+                "detector": "bruteforce",
+                "category": "暴力破解",
+                "src_ip": "10.0.0.5",
+                "dst_ip": "10.0.0.10",
+                "dst_port": 22,
+                "severity": "medium",
+                "description": "暴力破解-续",
+                "evidence": "",
+                "timestamp": "2026-07-08T10:00:30",
+            },
+        ]
+        result = correlate_behaviors(alerts, time_window_sec=60)
+        # 已预设的保持不变
+        assert result[0]["behavior_id"] == "preset-1"
+        # 后续同组告警继承预设的 behavior_id
+        assert result[1]["behavior_id"] == "preset-1"

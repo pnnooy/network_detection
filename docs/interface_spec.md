@@ -103,6 +103,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 | 字段 | 类型 | 是否必填 | 说明 |
 |---|---|---|---|
 | `alert_id` | string (uuid) | 是 | 全局唯一告警ID，建议用 `uuid.uuid4()` 生成 |
+| `behavior_id` | string (uuid) | 否 | 攻击行为事件标识。同一攻击源在时间窗口内对同一目标发起同类攻击的多条告警共享同一 `behavior_id`。检测模块可自行生成填入，未填写时由 aggregator 自动关联赋值 |
 | `detector` | string | 是 | 固定取值：`signature` / `bruteforce` / `anomaly` |
 | `category` | string | 是 | 攻击类型简述，如 `"Web攻击/SQL注入"`、`"暴力破解/非法登录"`、`"端口扫描"`、`"内网横向扩散"` |
 | `src_ip` | string | 是 | 攻击源IP |
@@ -111,7 +112,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 | `dst_network` | string | 否 | 受害目标网段（CIDR 格式，如 `"192.168.1.0/24"`），适用于端口扫描、横向扩散等网段级告警。单IP告警可不填 |
 | `dst_port` | int | 否 | 受害目标端口，无法确定时为 `null` |
 | `severity` | string | 是 | `low` / `medium` / `high` |
-| `description` | string | 是 | 人类可读的告警描述，用于 GUI 直接展示 |
+| `description` | string | 是 | **攻击行为描述**，用于 GUI 直接展示。须描述攻击者正在实施的行为（如 `"检测到针对 /login.php 的 SQL 注入攻击行为"`、`"针对 SSH 服务的暴力破解行为，60 秒内尝试 18 次登录"`），而非仅罗列特征串或统计数字 |
 | `evidence` | string | 否 | 匹配到的原始内容或统计证据（如匹配特征串、异常次数与阈值对比） |
 | `timestamp` | string (ISO8601) | 是 | 告警产生时间 |
 
@@ -121,6 +122,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 ```json
 {
   "alert_id": "b3f1a2c4-1234-4abc-9def-000000000001",
+  "behavior_id": "b3f1a2c4-1234-4abc-9def-000000000001",
   "detector": "signature",
   "category": "Web攻击/SQL注入",
   "src_ip": "192.168.1.10",
@@ -129,7 +131,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
   "dst_network": null,
   "dst_port": 80,
   "severity": "high",
-  "description": "检测到SQL注入特征: UNION SELECT",
+  "description": "检测到针对 /login.php 的 SQL 注入攻击行为，攻击者尝试利用 UNION 查询提取数据库用户凭据",
   "evidence": "GET /login.php?id=1 UNION SELECT username,password FROM users--",
   "timestamp": "2026-07-08T10:00:00.200"
 }
@@ -139,6 +141,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 ```json
 {
   "alert_id": "b3f1a2c4-1234-4abc-9def-000000000002",
+  "behavior_id": "b3f1a2c4-1234-4abc-9def-000000000002",
   "detector": "bruteforce",
   "category": "暴力破解/非法登录",
   "src_ip": "192.168.1.99",
@@ -147,7 +150,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
   "dst_network": null,
   "dst_port": 22,
   "severity": "medium",
-  "description": "60秒内检测到同一源IP对SSH端口发起18次连接尝试",
+  "description": "检测到针对 SSH 服务(22端口)的暴力破解行为，攻击源 192.168.1.99 在 60 秒内发起 18 次连接尝试，超出基线阈值 10 次",
   "evidence": "attempt_count=18, time_window_sec=60, threshold=10",
   "timestamp": "2026-07-08T10:01:30.000"
 }
@@ -157,6 +160,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 ```json
 {
   "alert_id": "b3f1a2c4-1234-4abc-9def-000000000003",
+  "behavior_id": "b3f1a2c4-1234-4abc-9def-000000000003",
   "detector": "anomaly",
   "category": "端口扫描",
   "src_ip": "192.168.1.77",
@@ -165,7 +169,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
   "dst_network": "192.168.1.0/24",
   "dst_port": null,
   "severity": "high",
-  "description": "单IP在60秒内访问了35个不同目标端口，超出基线阈值",
+  "description": "检测到针对内网 192.168.1.0/24 的端口扫描行为，攻击源 192.168.1.77 在 60 秒内探测了 35 个不同端口，超出基线阈值 20 个",
   "evidence": "unique_dst_port_count=35, baseline_threshold=20",
   "timestamp": "2026-07-08T10:02:00.000"
 }
@@ -175,6 +179,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 ```json
 {
   "alert_id": "b3f1a2c4-1234-4abc-9def-000000000004",
+  "behavior_id": "b3f1a2c4-1234-4abc-9def-000000000004",
   "detector": "anomaly",
   "category": "异常外联",
   "src_ip": "192.168.1.55",
@@ -183,7 +188,7 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
   "dst_network": null,
   "dst_port": 443,
   "severity": "medium",
-  "description": "内网主机外联陌生公网IP 203.0.113.99:443，不在已知外联白名单中",
+  "description": "检测到内网主机 192.168.1.55 异常外联陌生公网IP 203.0.113.99:443 的行为，该IP不在已知外联白名单中，疑似 C2 通信或数据外传",
   "evidence": "dst_ip=203.0.113.99, internal_networks=['192.168.0.0/16', '10.0.0.0/8', '172.16.0.0/12']",
   "timestamp": "2026-07-08T10:05:00.000"
 }
