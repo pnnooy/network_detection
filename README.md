@@ -51,8 +51,8 @@
 | 姓名 | 学号 | 邮箱 | Git 分支 | 负责模块 |
 |---|---|---|---|---|
 | **韩宇飞（组长）** | 524031910172 | hanyufei24@sjtu.edu.com | `feature/gui-alert` | 告警汇总 + 规则管理/展示GUI + 项目统筹 |
-| 李哲 | 524031910017 | lz3191323623@sjtu.edu.cn | `feature/packet-capture` | 数据包捕获与协议解析（地基模块） |
-| 曾子恒 | 523010910022 | zengziheng@sjtu.edu.cn | `feature/signature-engine` | 特征串匹配引擎（攻击特征库 + 匹配算法） |
+| 李哲 | 524031910017 | lz3191323623@sjtu.edu.cn | `feature/packet-capture` | ✅ 数据包捕获与协议解析（地基模块） |
+| 曾子恒 | 523010910022 | zengziheng@sjtu.edu.cn | `feature/signature-engine` | 特征行为检测引擎（特征库 + 匹配算法 + 行为聚合） |
 | 陈志恒 | 524031910111 | change57@sjtu.edu.cn | `feature/bruteforce-detect` | 暴力破解 / 非法登录检测 |
 | 姜新晨 | 524031910769 | debruyne17@sjtu.edu.cn | `feature/anomaly-detect` | 异常流量 / 扫描行为基线检测 |
 
@@ -75,6 +75,7 @@ network_detection/
 │   ├── __init__.py
 │   ├── capture/                     # 李哲
 │   │   ├── __init__.py
+│   │   ├── mock_generator.py        # mock 数据生成器（可复现）
 │   │   ├── packet_capture.py        # scapy 抓包
 │   │   ├── tcp_reassembly.py        # TCP 流重组
 │   │   └── protocol_parser.py       # 协议识别与字段解析
@@ -109,6 +110,7 @@ network_detection/
 │   └── test_gui_aggregator.py
 └── docs/
     ├── interface_spec.md            # 接口规范（权威版本）
+    ├── 选题报告.md                   # 项目选题报告
     └── final_report.md              # 最终答辩报告/PPT素材
 ```
 
@@ -267,12 +269,12 @@ cd network_detection
 # 安装依赖
 pip install -r requirements.txt
 
-# 创建并切换到自己的分支（以曾子恒为例）
-git checkout -b feature/signature-engine
+# 创建并切换到自己的分支
+git checkout -b feature/<你的分支名>   # 见第三节表格
 
 # 日常提交
 git add .
-git commit -m "[signature] feat: Phase1 环境搭建与接口骨架完成"
+git commit -m "[signature] feat: 环境搭建与接口骨架完成"
 git push origin feature/signature-engine
 
 # 完成阶段后在网页端发起 Pull Request 到 main
@@ -355,11 +357,11 @@ git push origin feature/signature-engine
 - **开发环境**：实时抓包相关操作（scapy 混杂模式）需要管理员/root 权限，且 Windows 下兼容性差。**强烈建议全员在 Linux 虚拟机（如 Ubuntu 22.04）或 WSL2 中开发**，避免环境差异导致的联调问题
 - 特征库、基线阈值等配置文件统一放在 `config/` 目录，便于集中管理和演示时调整
 - 请**仅在自己搭建的测试环境或授权范围内**产生测试流量（如自己触发SQL注入/暴力破解请求用于验证检测效果），不要对外部无关网络发起攻击性请求
-- Phase1 的 mock 数据质量直接影响后续三人的开发效率，建议李哲在设计 mock 数据时，逐条标注"预期应被哪个模块检测出、检测结果应是什么"，方便大家自测比对
+- ✅ Phase1 已完成，mock 数据已合入 main，覆盖 7 种场景 108 条记录。各检测模块基于 mock 数据自测时对照 `docs/interface_spec.md` 第 2.3 节的场景-预期检测结果对照表
 - **Python 最低版本要求 3.9**，请勿使用 3.9+ 独有的语法特性（如 `match/case` 需要 3.10），保持向下兼容
 - 各模块的 `detect()` 函数签名必须严格遵守 `docs/interface_spec.md`，**不要在函数签名中添加额外必填参数**（可选参数可以，但需有默认值）
 
 ---
 
 > **文档维护者**：韩宇飞（组长）
-> **最后更新**：2026-07-08（审阅修订版）
+> **最后更新**：2026-07-13（Phase2 启动）
