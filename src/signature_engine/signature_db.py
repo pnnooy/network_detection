@@ -47,13 +47,24 @@ def load_signatures(filepath: str | None = None) -> list[dict]:
             if len(parts) != 6:
                 logger.warning("跳过格式不正确的规则行: %s", line)
                 continue
+
+            rule_id, category, match_mode, pattern, protocol, severity = parts
+            pattern = pattern.replace("\\x7C", "|")
+
+            if match_mode == "regex":
+                try:
+                    re.compile(pattern)
+                except re.error as e:
+                    logger.warning("跳过规则 %s：regex 编译失败: %s", rule_id, e)
+                    continue
+
             signatures.append({
-                "rule_id": parts[0],
-                "category": parts[1],
-                "match_mode": parts[2],
-                "pattern": parts[3].replace("\\x7C", "|"),
-                "protocol": parts[4],
-                "severity": parts[5],
+                "rule_id": rule_id,
+                "category": category,
+                "match_mode": match_mode,
+                "pattern": pattern,
+                "protocol": protocol,
+                "severity": severity,
             })
 
     logger.info("已加载 %d 条攻击特征规则", len(signatures))
