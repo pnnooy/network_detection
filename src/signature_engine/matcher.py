@@ -72,7 +72,7 @@ def _match_signature(payload: str, protocol: str, signatures: list[dict]):
 
 def _parse_timestamp(ts: str):
     try:
-        return datetime.fromisoformat(ts)
+        return datetime.fromisoformat(ts.replace("Z", "+00:00"))
     except (TypeError, ValueError):
         return None
 
@@ -81,6 +81,8 @@ def _collect_hits(packets: list[dict], signatures: list[dict]) -> list[dict]:
     """逐包匹配，收集命中事件（尚未聚合为告警）。"""
     hits = []
     for pkt in packets:
+        if not isinstance(pkt, dict):
+            continue
         payload = pkt.get("payload") or ""
         if not payload:
             continue
@@ -106,19 +108,20 @@ def _collect_hits(packets: list[dict], signatures: list[dict]) -> list[dict]:
     return hits
 
 
-def _within_window(prev_hit: dict, hit: dict) -> bool:
-    """判断 hit 是否与窗口内上一条命中相隔不超过 60 秒（链式滑动窗口）。"""
-    prev_dt, dt = prev_hit["timestamp_dt"], hit["timestamp_dt"]
-    if prev_dt is None or dt is None:
+def _within_window(window_start: dict, hit: dict) -> bool:
+    """判断 hit 是否与窗口内第一条命中相隔不超过 60 秒（真正滑动窗口）。"""
+    start_dt, dt = window_start["timestamp_dt"], hit["timestamp_dt"]
+    if start_dt is None or dt is None:
         # 时间戳无法解析时不做跨包聚合，各自单独成组，避免误合并
         return False
-    return (dt - prev_dt).total_seconds() <= _AGGREGATION_WINDOW_SEC
+    return (dt - start_dt).total_seconds() <= _AGGREGATION_WINDOW_SEC
 
 
 def _build_alert(window: list[dict]) -> dict:
     """把同一 (src_ip, dst_ip, category) 窗口内的命中事件合并成一条行为告警。"""
     first, last = window[0], window[-1]
     count = len(window)
+    behavior_id = str(uuid.uuid4())
 
     src_ports = {h["src_port"] for h in window}
     dst_ports = {h["dst_port"] for h in window}
@@ -130,11 +133,13 @@ def _build_alert(window: list[dict]) -> dict:
 
     return {
         "alert_id": str(uuid.uuid4()),
+        "behavior_id": behavior_id,
         "detector": "signature",
         "category": first["category"],
         "src_ip": first["src_ip"],
         "src_port": src_port,
         "dst_ip": first["dst_ip"],
+        "dst_network": None,
         "dst_port": dst_port,
         "severity": severity,
         "description": f"{_AGGREGATION_WINDOW_SEC}秒内 {first['src_ip']} 对 {first['dst_ip']} "
@@ -158,7 +163,7 @@ def _aggregate_hits(hits: list[dict]) -> list[dict]:
 
         window: list[dict] = []
         for hit in group_hits:
-            if window and not _within_window(window[-1], hit):
+            if window and not _within_window(window[0], hit):
                 alerts.append(_build_alert(window))
                 window = []
             window.append(hit)
