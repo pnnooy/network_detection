@@ -10,13 +10,36 @@
 #   匹配模式    — literal（子串匹配，大小写不敏感）/ regex（正则表达式）
 #   特征串      — 匹配内容；如含 | 字符请用 \x7C 转义
 #   适用协议    — 限制匹配的协议，* 表示不限制；多个协议用 / 分隔
-#                 如 HTTP / TCP / *
+#                 如 TCP / UDP / *
 #   严重程度    — low / medium / high
 #
-# 示例（以下为参考示例，正式规则由曾子恒定义）:
+# 注意（曾子恒 2026-07-13）：
+#   报文记录的 protocol 字段（见 docs/interface_spec.md §2.1）取值只有
+#   TCP / UDP / ICMP / ARP，没有独立的应用层协议字段。如果这里写 HTTP，
+#   matcher.py 的协议过滤会导致规则永远匹配不到任何报文（不报错，只是
+#   静默失效），所以本文件里所有 Web 类规则统一用 TCP。
+#   signature_db.py 已实现 \x7C ↔ | 双向转义（加载时 \x7C→|，写入时 |→\x7C），
+#   文件中可直接使用 \x7C 表示 | 字符。当前规则集因历史原因未使用 | 字符，
+#   用多条规则代替正则多选一写法，后续可自由选用。
 #
-# SIG-001 | SQL注入 | literal | UNION SELECT | HTTP | high
-# SIG-002 | SQL注入 | literal | ' OR 1=1 | HTTP | high
-# SIG-003 | XSS | regex | <script.*?>.*?</script> | HTTP | medium
-# SIG-004 | 恶意命令 | literal | /bin/cat%20/etc/passwd | HTTP | high
-# SIG-005 | 木马通信 | literal | /faxsurvey? | TCP | high
+# ------------------------------------------------------------
+
+# --- SQL 注入 ---
+SIG-001 | SQL注入 | literal | UNION SELECT | TCP | high
+SIG-002 | SQL注入 | literal | ' OR 1=1 | TCP | high
+SIG-003 | SQL注入 | literal | ' OR '1'='1 | TCP | high
+SIG-004 | SQL注入 | literal | DROP TABLE | TCP | high
+SIG-005 | SQL注入 | literal | SELECT * FROM | TCP | medium
+
+# --- XSS ---
+SIG-006 | XSS | regex | <script.*?>.*?</script> | TCP | medium
+SIG-007 | XSS | literal | javascript: | TCP | low
+
+# --- 木马通信 ---
+SIG-008 | 木马通信 | literal | /faxsurvey? | TCP | high
+
+# --- 恶意命令 ---
+SIG-009 | 恶意命令 | literal | /bin/cat%20 | TCP | high
+SIG-010 | 恶意命令 | literal | /bin/ls%20 | TCP | high
+SIG-011 | 恶意命令 | literal | /etc/passwd | TCP | high
+SIG-012 | 恶意命令 | literal | /etc/shadow | TCP | high
