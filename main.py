@@ -82,7 +82,9 @@ def main():
     parser.add_argument("--output-dir", default="results", help="告警输出目录")
     parser.add_argument("--live", action="store_true", help="实时抓包模式（Phase4+）")
     parser.add_argument("--interface", default="eth0", help="实时抓包网卡名称")
-    parser.add_argument("--gui-only", action="store_true", help="仅启动 GUI（不运行检测）")
+    parser.add_argument("--gui-only", action="store_true", help="仅启动 GUI（tkinter 桌面版，不运行检测）")
+    parser.add_argument("--web", action="store_true", help="启动 Web 监控面板（浏览器访问）")
+    parser.add_argument("--web-port", type=int, default=8099, help="Web 面板端口（默认 8099）")
     parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"])
 
     args = parser.parse_args()
@@ -96,6 +98,13 @@ def main():
         from src.gui_alert.gui import launch_gui
 
         launch_gui()
+        return
+
+    if args.web:
+        from src.gui_alert.web_gui import main as web_main
+
+        sys.argv = ["web_gui", "--port", str(args.web_port)]
+        web_main()
         return
 
     if args.live:
