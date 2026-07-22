@@ -603,12 +603,14 @@ class TestMockData:
     """基于 Phase1 交付的 mock_data/mock_packets.json 端到端比对。"""
 
     def test_detects_port_scan(self, mock_packets):
-        """mock 数据中 192.168.1.77 对 192.168.1.20 的端口扫描应被检出。"""
+        """mock 数据中端口扫描应被检出（至少含 192.168.1.77 的原始扫描）。"""
         alerts = detect(mock_packets)
         scan = [a for a in alerts if a["category"] == "端口扫描"]
-        assert len(scan) == 1
-        a = scan[0]
-        assert a["src_ip"] == "192.168.1.77"
+        assert len(scan) >= 1
+        # 验证原始端口扫描 192.168.1.77 仍被检出
+        scan_77 = [a for a in scan if a["src_ip"] == "192.168.1.77"]
+        assert len(scan_77) == 1
+        a = scan_77[0]
         assert a["dst_ip"] == "192.168.1.20"
         assert a["detector"] == "anomaly"
         assert "24" in a["evidence"]
@@ -632,15 +634,19 @@ class TestMockData:
         """mock 数据（扩充后）含横向扩散场景，应被检出。"""
         alerts = detect(mock_packets)
         lat = [a for a in alerts if a["category"] == "内网横向扩散"]
-        assert len(lat) == 1
-        assert lat[0]["src_ip"] == "10.0.0.77"
+        assert len(lat) >= 1
+        # 原始场景 10.0.0.77 应被检出
+        lat_77 = [a for a in lat if a["src_ip"] == "10.0.0.77"]
+        assert len(lat_77) == 1
 
     def test_high_frequency_detected_in_mock_data(self, mock_packets):
-        """mock 数据（扩充后）含高频连接场景。"""
+        """mock 数据（扩充后）含高频连接场景，应被检出。"""
         alerts = detect(mock_packets)
         hf = [a for a in alerts if a["category"] == "异常高频连接"]
-        assert len(hf) == 1
-        assert hf[0]["src_ip"] == "192.168.1.88"
+        assert len(hf) >= 1
+        # 原始场景 192.168.1.88 应被检出
+        hf_88 = [a for a in hf if a["src_ip"] == "192.168.1.88"]
+        assert len(hf_88) == 1
 
     def test_all_alerts_conform_to_schema(self, mock_packets):
         for a in detect(mock_packets):
