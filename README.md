@@ -48,15 +48,15 @@
 
 ## 三、项目成员与分工
 
-| 姓名 | 学号 | 邮箱 | Git 分支 | 负责模块 |
+| 姓名 | 学号 | GitHub | 负责模块 | 状态 |
 |---|---|---|---|---|
-| **韩宇飞（组长）** | 524031910172 | hanyufei24@sjtu.edu.com | `feature/gui-alert` | 告警汇总 + 规则管理/展示GUI + 项目统筹 |
-| 李哲 | 524031910017 | lz3191323623@sjtu.edu.cn | `feature/packet-capture` | ✅ 数据包捕获与协议解析（地基模块） |
-| 曾子恒 | 523010910022 | zengziheng@sjtu.edu.cn | `feature/signature-engine` | 特征行为检测引擎（特征库 + 匹配算法 + 行为聚合） |
-| 陈志恒 | 524031910111 | change57@sjtu.edu.cn | `feature/bruteforce-detect` | 暴力破解 / 非法登录检测 |
-| 姜新晨 | 524031910769 | debruyne17@sjtu.edu.cn | `feature/anomaly-detect` | 异常流量 / 扫描行为基线检测 |
+| **韩宇飞（组长）** | 524031910172 | pnnooy | 告警汇总 + 行为关联 + 监控GUI + 项目统筹 | ✅ 已合入 |
+| 李哲 | 524031910017 | Entropy-wz | 数据包捕获与协议解析（地基模块） | ✅ 已合入 |
+| 曾子恒 | 523010910022 | zengziheng-rude | 特征行为检测引擎（特征库 + 匹配算法 + 行为聚合） | ✅ 已合入 |
+| 陈志恒 | 524031910111 | 陈志恒 | 暴力破解 / 非法登录检测 | ✅ 已合入 |
+| 姜新晨 | 524031910769 | Jiang060117 | 异常流量 / 扫描行为基线检测 | ✅ 已合入 |
 
-组长电话：18737507536
+> 组长电话：18737507536
 
 ---
 
@@ -96,11 +96,11 @@ network_detection/
 │       └── gui.py                   # 图形界面（规则管理 + 实时告警）
 ├── mock_data/
 │   └── mock_packets.json            # 李哲在 Phase1 交付的模拟报文数据
-├── results/
+├── results/                          # 告警输出目录（各模块产出 + 汇总）
 │   ├── signature_alerts.json
 │   ├── bruteforce_alerts.json
 │   ├── anomaly_alerts.json
-│   └── merged_alerts.json           # 韩宇飞汇总输出
+│   └── merged_alerts.json            # 韩宇飞汇总输出（含 behavior_id）
 ├── tests/
 │   ├── __init__.py
 │   ├── test_capture.py
@@ -120,38 +120,56 @@ network_detection/
 
 ## 五、各模块任务清单
 
-### A. 数据包捕获与协议解析 —— 李哲（地基模块，需第一时间交付接口数据）
-- 功能：调用 scapy 捕获网络报文；对 TCP 流做重组（不考虑跨包攻击特征可先简化）；解析出 IP/TCP/UDP/应用层字段与 payload
-- 输出：标准化报文记录（供 B/C/D 三个模块统一消费）
-- **关键职责**：Phase1 阶段必须交付 `mock_data/mock_packets.json`——一批覆盖"正常流量、SQL注入/XSS特征报文、高频登录尝试、端口扫描"等场景的模拟报文数据，供其余三人在真实抓包模块完成前先行开发和自测
-- 加分项：支持 IP 分片重组、加密流量的基础识别（仅识别是否为TLS流量，不要求解密）
+### A. 数据包捕获与协议解析 —— 李哲 ✅
 
-### B. 特征行为检测引擎 —— 曾子恒
-- 功能：维护攻击特征库（配置文件 `config/signatures.txt`，格式为 `规则ID | 攻击类型 | 匹配模式(literal/regex) | 特征串 | 适用协议 | 严重程度`），对报文 payload 做特征匹配，覆盖 SQL注入、XSS、木马通信、恶意命令等
-- **行为聚合**：对同一源 IP 在时间窗口（默认 60 秒）内对同一目标命中同类特征的多次匹配，聚合为一条攻击行为告警，而非逐包逐条报警。告警描述应体现攻击行为（如"针对 /login.php 的 SQL 注入攻击行为"），而非仅罗列特征串
-- 技术要点：先实现暴力字符串匹配 baseline，**可选做加分项**——替换为 KMP/BM/AC自动机等高效算法，并测试匹配速度对比（这是本项目最容易出彩、最容易量化的创新点）
-- 输入：`mock_data/mock_packets.json`（Phase1-3）→ 真实抓包模块输出（Phase4联调后）
+- **实际完成**：TCP 重组、协议识别（TCP/UDP/ICMP/ARP）、TLS 流量识别、`mock_packets.json`（108 条 7 场景）+ `mock_generator.py` 可复现生成器
+- **测试**：`tests/test_capture.py`（20 个测试），覆盖 TCP 重组正确性、协议字段解析、mock 数据格式合规性
+- 输出：标准化报文记录（供 B/C/D 三个模块统一消费）
+
+### B. 特征行为检测引擎 —— 曾子恒 ✅
+
+- **实际完成**：12 条攻击特征规则（SQL注入 5 条 / XSS 2 条 / 木马通信 1 条 / 恶意命令 4 条），支持 `literal`（子串匹配）和 `regex`（正则匹配）两种模式，大小写不敏感
+- **行为聚合**：同一 (src_ip, dst_ip, category) 在 60 秒窗口内的多次特征命中合并为一条行为告警，消除逐包碎片化
+- **规则库管理**：`signature_db.py` 提供 `add_signature()` / `delete_signature()` 增删接口，含字段校验、自动 ID 分配、`|` 字符转义
+- **测试**：`tests/test_signature.py`（38 个测试），覆盖四大类攻击检出、协议过滤、窗口聚合/拆分、告警格式合规、边界异常、mock 数据端到端
 - 输出：`results/signature_alerts.json`
 
-### C. 暴力破解 / 非法登录检测 —— 陈志恒
-- 功能：监控 SSH(22)、FTP(21)、Web登录等端口的连接与认证尝试，识别短时间内针对同一目标的大量登录请求，判定为暴力破解/非法尝试登录
-- 技术要点：基于时间窗口的计数统计（如60秒内同一源IP对同一端口的连接次数超过阈值即告警）。可结合 `direction` / `flags` 字段辅助判断连接是否被拒绝
-- 输入：`mock_data/mock_packets.json` → 真实抓包模块输出
+### C. 暴力破解 / 非法登录检测 —— 陈志恒 ✅
+
+- **实际完成**：双指针滑动窗口统计 SYN/RST 包数量，针对 SSH(22)/FTP(21)/Web登录端口识别短时间内大量连接尝试，支持退化 flow_id 计数
+- **测试**：`tests/test_bruteforce.py`（25 个测试），覆盖窗口边界、阈值可配置、mock 数据检出 1 条 SSH 暴力破解告警
 - 输出：`results/bruteforce_alerts.json`
 
-### D. 异常流量 / 扫描行为基线检测 —— 姜新晨
-- 功能：建立主机行为基线（并发连接数、访问频次、端口访问分布、会话时长等），识别偏离基线的行为：单IP高频端口扫描、异常外联陌生IP、内网横向扩散迹象
-- 技术要点：基线可先用简单的统计阈值（均值+标准差或固定阈值），阈值存放于 `config/baseline_config.json` 方便调整
-- 输入：`mock_data/mock_packets.json` → 真实抓包模块输出
-- 输出：`results/anomaly_alerts.json`
-- 加分项：机器学习方法识别未知模式（可选，作为传统阈值方法的对比补充，不强制要求）
+### D. 异常流量 / 扫描行为基线检测 —— 姜新晨 ✅
 
-### E. 告警汇总 + 行为关联 + 监控 GUI —— 韩宇飞（组长）
-- 功能 1：`aggregator.py` 汇总 B/C/D 三个模块输出的告警 json，按 timestamp 排序、按 alert_id 去重
-- 功能 2：**行为关联**：将来自同一源 IP、同一 attack_category、时间相近（默认 60 秒内）的多条告警归入同一攻击行为事件，赋予相同的 `behavior_id`，便于 GUI 以行为粒度而非逐条告警维度展示
-- 功能 3：GUI（tkinter/PyQt/或简易Web页面），以攻击行为为粒度展示实时告警、支持按行为类型/严重程度/攻击源筛选，支持特征库的导入导出/增删改查界面
+- **实际完成**：四项检测——端口扫描（滑动窗口统计唯一 dst_port）、异常外联（内网→公网 IP 匹配+去重）、内网横向扩散（滑动窗口统计唯一内网 dst_ip）、高频连接（滑动窗口统计连接速率）
+- **基线模块**：`baseline.py` 提供主机行为基线统计（并发数/频次/端口分布/会话时长），供动态阈值参考
+- **配置**：`config/baseline_config.json` 统一管理四项检测阈值与内网段定义
+- **测试**：`tests/test_anomaly.py`（45 个测试），覆盖四项检测检出/不误报、窗口边界、告警格式合规、边界异常、mock 数据端到端
+- 输出：`results/anomaly_alerts.json`
+
+### E. 告警汇总 + 行为关联 + 监控 GUI —— 韩宇飞（组长） ✅
+
+- **实际完成**：
+  - `aggregator.py`：合并/排序/去重 + `correlate_behaviors()` 行为关联（同源同类时间相近 → 共享 behavior_id）
+  - `gui.py`：tkinter 三页签（告警监控 / 特征库管理 / 统计概览），零外部依赖
+  - `main.py`：全链路入口，一键运行 `python main.py --input mock_data/mock_packets.json`
+- **接口规范**：`docs/interface_spec.md` 定义报文记录格式、统一告警格式、函数签名、CLI 调用约定、日志规范
+- **测试**：`tests/test_gui_aggregator.py`（20 个测试）
 - 输出：`results/merged_alerts.json`（含 `behavior_id`）+ 图形界面
-- 组长额外职责：统筹进度、组织联调、定义并维护统一告警 schema、维护 `main.py` 入口与本 README
+
+### 测试覆盖总览
+
+| 模块 | 测试文件 | 测试数 | 覆盖范围 |
+|---|---|---|---|
+| capture | `test_capture.py` | 20 | TCP 重组、协议解析、mock 格式合规 |
+| signature | `test_signature.py` | 38 | SQL注入/XSS/木马/恶意命令 检出、协议过滤、窗口聚合、mock 端到端 |
+| bruteforce | `test_bruteforce.py` | 25 | 滑动窗口统计、SYN/RST 计数、阈值可配、mock 端到端 |
+| anomaly | `test_anomaly.py` | 45 | 端口扫描/异常外联/横向扩散/高频连接 检出、告警格式、mock 端到端 |
+| gui + aggregator | `test_gui_aggregator.py` | 20 | 行为关联、去重排序、GUI 组件 |
+| **合计** | | **148** | **全部通过，2 跳过（环境依赖）** |
+
+> 运行全量测试：`python -m pytest tests/ -v`
 
 ---
 
@@ -187,10 +205,11 @@ network_detection/
 各消费模块（B/C/D）统一函数签名：
 
 ```python
-def detect(packets: list[dict]) -> list[dict]:
+def detect(packets: list[dict], config: dict | None = None) -> list[dict]:
     """
     packets: 符合上方 schema 的报文记录列表
-    返回: 符合下方"统一告警格式"的告警列表
+    config:  可选的模块配置字典，为 None 时从模块默认配置文件加载
+    返回: 符合下方"统一告警格式"的告警列表（无告警时返回空列表 []，不要返回 None）
     """
 ```
 
@@ -286,14 +305,14 @@ git push origin feature/signature-engine
 
 > **原则：每人独立开发，每完成一个阶段提交（commit）一次，禁止攒到最后一次性提交。**
 
-| 阶段 | 内容 | 时间 | Commit message 示例 |
+| 阶段 | 内容 | 时间 | 状态 |
 |---|---|---|---|
-| **Phase 1** | **李哲**：7/9(四)~7/12(日) 交付 `mock_data/mock_packets.json`；**其余人**：7/13(一)拉分支、搭建模块骨架、确认接口 | 7/9 ~ 7/13 | `[capture] feat: 抓包框架骨架 + mock数据交付` |
-| **Phase 2** | 完成核心检测逻辑；基于 mock 数据跑通基础用例（如正确检出SQL注入攻击行为/暴力破解行为/端口扫描行为）| 7/14(二) ~ 7/18(六) | `[bruteforce] feat: 核心检测逻辑实现完成` |
-| **Phase 2.5** | **接口对齐检查**：每人用真实输出跑 `aggregator.py`，确认告警格式含 `behavior_id`、`description` 为行为导向语态 | 7/20(一) | — |
-| **Phase 3** | 编写单元测试，覆盖正常/异常场景；补充日志与异常处理 | 7/21(二) ~ 7/22(三) | `[anomaly] test: 单元测试与异常处理完成` |
-| **Phase 4** | 真实抓包替换mock数据联调；补充文档/注释；提 PR 合入 main | 7/23(四) ~ 7/25(六) | `[gui] feat: 全链路联调 + PR合入` |
-| **Phase 5** | PPT、演示数据、截图、结题报告 | 7/26(日) ~ 7/28(二) | `[signature] docs: 答辩材料准备完成` |
+| **Phase 1** | 李哲交付 mock 数据 + capture 模块；其余人拉分支、搭建骨架 | 7/9 ~ 7/13 | ✅ 已完成 |
+| **Phase 2** | 完成核心检测逻辑；基于 mock 数据跑通基础用例 | 7/14 ~ 7/18 | ✅ 已完成 |
+| **Phase 2.5** | **接口对齐检查**：审核 PR 校验告警格式合规 | 7/20 ~ 7/22 | ✅ 已完成 |
+| **Phase 3** | 单元测试 + 异常处理 + 日志规范；PR 合入 main | 7/21 ~ 7/22 | ✅ 已完成（148 测试全绿） |
+| **Phase 4** | 真实抓包替换 mock 数据联调；补充文档/注释 | 7/23(四) ~ 7/25(六) | 🚀 **明天启动** |
+| **Phase 5** | PPT、演示数据、截图、结题报告 | 7/26(日) ~ 7/28(二) | 📋 待开始 |
 | **🎤 内部预演** | 完整走一遍汇报流程，发现并修正问题 | **7/28(二)** | — |
 | **★ 项目汇报** | 课堂分享汇报 | **7/29(三)** | — |
 | **📝 结题报告** | 结题报告撰写 + 源码整理 | 7/30(四) ~ 8/1(六) | — |
@@ -301,7 +320,7 @@ git push origin feature/signature-engine
 | **缓冲** | 应对意外问题 | 8/3(一) ~ 8/4(二) | — |
 | **📅 官方截止** | 结题报告提交截止 | 8/5(三) | — |
 
-> **Phase 2.5 定在周一**：7/20(一) 由韩宇飞运行 `aggregator.py` 读取各模块实际输出，校验告警格式。发现不一致立即通知对应同学修正。
+> **Phase 2.5 已完成**（7/22）：韩宇飞审核 PR #2（anomaly）和 PR #3（signature），修复问题并补写测试后全部合入 main。全量 148 测试全绿，接口格式已验证通过。
 
 ### Commit message 规范
 
@@ -323,14 +342,11 @@ git push origin feature/signature-engine
 
 ## 九、联调与合并流程
 
-1. 各自在 feature 分支完成 Phase1~Phase4 后，发起 Pull Request 到 `main`
-2. 组长（韩宇飞）或指定同学完成 Code Review
-3. Review 通过后合并入 `main`；若有冲突，由提出者自行解决后重新提交
-4. **✅ Phase1 已完成**，李哲的 capture 模块 + mock 数据已合入 main，其余三人 Phase2 起有稳定的数据源可用
-5. **Phase 2.5**（7/20 周一），韩宇飞运行 `aggregator.py` 对各模块实际输出做接口格式校验，发现不一致立即修正
-6. **Phase4 阶段**，李哲的真实抓包模块与 B/C/D 三个检测模块做替换 mock 数据的全链路联调，确认真实场景下检测行为结果仍然正确
-7. 全部模块合并后，由韩宇飞负责的 `aggregator.py` + `gui.py` 统一读取 `results/` 下所有 json，完成行为关联汇总展示联调
-8. 联调中发现的问题以 Issue 形式记录 → 原模块负责人修复 → 重新提交 → 再次合并
+1. 各自在 feature 分支完成核心逻辑后，发起 Pull Request 到 `main`
+2. 组长（韩宇飞）完成 Code Review，修复问题后合并
+3. **✅ Phase1~3 全部完成**：5 人全部模块已合入 main，148 测试全绿
+4. **Phase 4 联调**（7/23 周四起）：运行 `python main.py --input mock_data/mock_packets.json` 做全链路验证；李哲的真实抓包模块与 B/C/D 检测模块替换 mock 数据联调
+5. 联调中发现的问题以 Issue 形式记录 → 原模块负责人修复 → 重新提交 → 再次合并
 
 ---
 
@@ -341,9 +357,9 @@ git push origin feature/signature-engine
 | 日期 | 里程碑 |
 |---|---|
 | 7/9(四) ~ 7/12(日) | ✅ **李哲**交付 mock 数据 + capture 模块（已完成合入） |
-| 7/13(一) ~ 7/18(六) | 四人完成核心检测逻辑，7/20(一) **接口对齐检查** |
-| 7/20(一) ~ 7/22(三) | 单元测试 + 异常处理，修正接口问题 |
-| 7/23(四) ~ 7/25(六) | 联调 + PR 合入 main |
+| 7/13(一) ~ 7/18(六) | ✅ 四人完成核心检测逻辑 |
+| 7/20(一) ~ 7/22(三) | ✅ 单元测试 + PR 审核合入（148 测试全绿） |
+| 7/23(四) ~ 7/25(六) | 🚀 **联调 + 全链路验证** |
 | 7/26(日) ~ 7/27(一) | PPT + 演示数据准备 |
 | 7/28(二) | **内部预演**，发现并修正问题 |
 | **7/29(三)** | ★ **项目分享汇报** |
@@ -359,11 +375,12 @@ git push origin feature/signature-engine
 - **开发环境**：实时抓包相关操作（scapy 混杂模式）需要管理员/root 权限，且 Windows 下兼容性差。**强烈建议全员在 Linux 虚拟机（如 Ubuntu 22.04）或 WSL2 中开发**，避免环境差异导致的联调问题
 - 特征库、基线阈值等配置文件统一放在 `config/` 目录，便于集中管理和演示时调整
 - 请**仅在自己搭建的测试环境或授权范围内**产生测试流量（如自己触发SQL注入/暴力破解请求用于验证检测效果），不要对外部无关网络发起攻击性请求
-- ✅ Phase1 已完成，mock 数据已合入 main，覆盖 7 种场景 108 条记录。各检测模块基于 mock 数据自测时对照 `docs/interface_spec.md` 第 2.3 节的场景-预期检测结果对照表
+- ✅ **Phase1~3 全部完成**，5 人模块已合入 main，mock 数据覆盖 7 种场景 108 条记录，全量 148 测试全绿
 - **Python 最低版本要求 3.9**，请勿使用 3.9+ 独有的语法特性（如 `match/case` 需要 3.10），保持向下兼容
 - 各模块的 `detect()` 函数签名必须严格遵守 `docs/interface_spec.md`，**不要在函数签名中添加额外必填参数**（可选参数可以，但需有默认值）
+- 联调前各模块可独立运行验证：`python -m src.<模块>.<文件> --input mock_data/mock_packets.json --output results/<模块>_alerts.json`
 
 ---
 
 > **文档维护者**：韩宇飞（组长）
-> **最后更新**：2026-07-13（Phase2 启动）
+> **最后更新**：2026-07-22（Phase3 完成，全部模块合入，准备联调）
