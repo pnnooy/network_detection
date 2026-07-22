@@ -279,3 +279,4 @@ logging.basicConfig(
 |---|---|---|
 | 2026-07-08 | 韩宇飞 | 初始版本，定义报文记录格式与统一告警格式 |
 | 2026-07-08 | 韩宇飞（审阅修订） | 新增 `flow_id`、`direction` 可选字段；新增 `dst_network` 字段解决 CIDR 歧义；明确 `payload_len` 为线路上原始字节长度；新增统一日志规范（4.4节）；新增异常外联告警示例 |
+| 2026-07-22 | 韩宇飞（PR审核） | §4.1 `detect()` 签名更新为 `detect(packets, config=None)`，允许模块接收可选配置参数；同步 anomaly 与 signature 模块实现 |
