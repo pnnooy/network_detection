@@ -201,9 +201,10 @@ Phase1 交付的 mock 数据需要覆盖以下场景，并在 `docs/final_report
 ### 4.1 检测模块（B / C / D 共用签名）
 
 ```python
-def detect(packets: list[dict]) -> list[dict]:
+def detect(packets: list[dict], config: dict | None = None) -> list[dict]:
     """
     输入: 符合"报文记录格式"的列表
+         config: 可选的模块配置字典，为 None 时从模块默认配置文件加载
     输出: 符合"统一告警格式"的列表（无告警时返回空列表 []，不要返回 None）
     """
 ```

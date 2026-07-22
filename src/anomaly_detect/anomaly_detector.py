@@ -151,7 +151,7 @@ def _detect_port_scan(
         severity = "high" if unique_count >= threshold * 2 else "medium"
 
         description = (
-            f"检测到针对内网 {dst_network or dst_ip} 的端口扫描行为，"
+            f"检测到针对目标 {dst_network or dst_ip} 的端口扫描行为，"
             f"攻击源 {src_ip} 在 {time_window} 秒内向 {dst_ip} 探测了 "
             f"{unique_count} 个不同端口，超出基线阈值 {threshold} 个"
         )

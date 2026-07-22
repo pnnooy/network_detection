@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 import logging
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ def _parse_ts(timestamp: object) -> datetime | None:
         return datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
     except ValueError:
         try:
-            return datetime.strptime(timestamp[:19], "%Y-%m-%dT%H:%M:%S")
+            return datetime.strptime(timestamp[:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
         except (ValueError, TypeError):
             return None
 
