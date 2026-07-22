@@ -61,3 +61,12 @@ SIG-020 | 命令注入 | literal | ` id` | TCP | high
 # --- XXE / XML 注入 ---
 SIG-021 | XXE注入 | literal | <!ENTITY | TCP | high
 SIG-022 | XXE注入 | literal | SYSTEM "file:/// | TCP | high
+
+# --- DNS 隧道 ---
+SIG-023 | DNS隧道 | regex | [a-zA-Z0-9+/=]{30,}\.evil | UDP | high
+SIG-024 | DNS隧道 | literal | dns-tunnel-encoded | UDP | medium
+
+# --- SMB 漏洞利用 ---
+SIG-025 | SMB漏洞利用 | literal | EternalBlue | TCP | high
+SIG-026 | SMB漏洞利用 | literal | \x7C\x7C\x7C\x7C | TCP | medium
+SIG-027 | SMB漏洞利用 | literal | cmd.exe /c | TCP | high

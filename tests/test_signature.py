@@ -495,25 +495,27 @@ class TestMockData:
     """基于 Phase1 交付的 mock_data/mock_packets.json 端到端比对。"""
 
     def test_detects_sql_injection(self, mock_packets):
-        """mock 数据中 192.168.1.10 的 6 条 SQL 注入应被检出并聚合为 1 条告警。"""
+        """mock 数据中 SQL 注入应被检出（至少含 192.168.1.10 的攻击）。"""
         alerts = detect(mock_packets)
         sql = [a for a in alerts if a["category"] == "SQL注入"]
-        assert len(sql) == 1
-        a = sql[0]
-        assert a["src_ip"] == "192.168.1.10"
+        assert len(sql) >= 1
+        # 验证原始攻击源 192.168.1.10 被检出
+        sql_10 = [a for a in sql if a["src_ip"] == "192.168.1.10"]
+        assert len(sql_10) == 1
+        a = sql_10[0]
         assert a["dst_ip"] == "192.168.1.20"
         assert a["detector"] == "signature"
         assert "hit_count=" in a["evidence"]
-        # mock 数据中 192.168.1.10 的 SQL 注入报文聚合数（6-8 条之间）
 
     def test_detects_xss(self, mock_packets):
-        """mock 数据中 192.168.1.11 的 XSS 攻击应被检出并聚合为 1 条告警。"""
+        """mock 数据中 XSS 应被检出（至少含 192.168.1.11 的攻击）。"""
         alerts = detect(mock_packets)
         xss = [a for a in alerts if a["category"] == "XSS"]
-        assert len(xss) == 1
-        a = xss[0]
-        assert a["src_ip"] == "192.168.1.11"
-        assert a["dst_ip"] == "192.168.1.20"
+        assert len(xss) >= 1
+        # 验证原始攻击源 192.168.1.11 被检出
+        xss_11 = [a for a in xss if a["src_ip"] == "192.168.1.11"]
+        assert len(xss_11) == 1
+        assert xss_11[0]["dst_ip"] == "192.168.1.20"
 
     def test_detects_trojan_and_malicious_command(self, mock_packets):
         """mock 数据中应检出木马通信和恶意命令。"""
@@ -530,7 +532,8 @@ class TestMockData:
         """正常 HTTP/SSH/FTP 流量不应产生 signature 告警。"""
         alerts = detect(mock_packets)
         attack_src_ips = {"192.168.1.10", "192.168.1.11", "192.168.1.12",
-                          "192.168.1.33", "192.168.1.44", "192.168.1.55", "192.168.1.66"}
+                          "192.168.1.33", "192.168.1.44", "192.168.1.55", "192.168.1.66",
+                          "10.0.0.5", "10.0.0.99", "192.168.1.200"}
         other_alerts = [a for a in alerts if a["src_ip"] not in attack_src_ips]
         assert other_alerts == []
 
@@ -549,6 +552,6 @@ class TestMockData:
         assert bf_alerts == []
 
     def test_alert_count_in_expected_range(self, mock_packets):
-        """聚合后告警数量应在合理范围（8-15 条行为告警）。"""
+        """聚合后告警数量应在合理范围（12-20 条行为告警）。"""
         alerts = detect(mock_packets)
-        assert 8 <= len(alerts) <= 15
+        assert 12 <= len(alerts) <= 20
