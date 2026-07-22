@@ -516,20 +516,21 @@ class TestMockData:
         assert a["dst_ip"] == "192.168.1.20"
 
     def test_detects_trojan_and_malicious_command(self, mock_packets):
-        """mock 数据中 192.168.1.12 的木马+恶意命令应被检出。"""
+        """mock 数据中应检出木马通信和恶意命令。"""
         alerts = detect(mock_packets)
         trojan = [a for a in alerts if a["category"] == "木马通信"]
         malicious = [a for a in alerts if a["category"] == "恶意命令"]
         assert len(trojan) >= 1
         assert len(malicious) >= 1
-        for a in trojan + malicious:
-            assert a["src_ip"] == "192.168.1.12"
-            assert a["dst_ip"] == "192.168.1.20"
+        # 至少有一条来自原始攻击源 192.168.1.12
+        original_alerts = [a for a in trojan + malicious if a["src_ip"] == "192.168.1.12"]
+        assert len(original_alerts) >= 2
 
     def test_normal_traffic_not_flagged(self, mock_packets):
         """正常 HTTP/SSH/FTP 流量不应产生 signature 告警。"""
         alerts = detect(mock_packets)
-        attack_src_ips = {"192.168.1.10", "192.168.1.11", "192.168.1.12"}
+        attack_src_ips = {"192.168.1.10", "192.168.1.11", "192.168.1.12",
+                          "192.168.1.33", "192.168.1.44", "192.168.1.55", "192.168.1.66"}
         other_alerts = [a for a in alerts if a["src_ip"] not in attack_src_ips]
         assert other_alerts == []
 
@@ -548,6 +549,6 @@ class TestMockData:
         assert bf_alerts == []
 
     def test_alert_count_in_expected_range(self, mock_packets):
-        """聚合后告警数量应在合理范围（3-5 条行为告警）。"""
+        """聚合后告警数量应在合理范围（8-15 条行为告警）。"""
         alerts = detect(mock_packets)
-        assert 3 <= len(alerts) <= 5
+        assert 8 <= len(alerts) <= 15

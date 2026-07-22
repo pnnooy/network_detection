@@ -628,17 +628,19 @@ class TestMockData:
         bids = {a["behavior_id"] for a in ext_55}
         assert len(bids) == 1
 
-    def test_no_lateral_movement_in_mock_data(self, mock_packets):
-        """mock 数据不含横向扩散场景，不应产生相应告警。"""
+    def test_lateral_movement_detected_in_mock_data(self, mock_packets):
+        """mock 数据（扩充后）含横向扩散场景，应被检出。"""
         alerts = detect(mock_packets)
         lat = [a for a in alerts if a["category"] == "内网横向扩散"]
-        assert lat == []
+        assert len(lat) == 1
+        assert lat[0]["src_ip"] == "10.0.0.77"
 
-    def test_no_high_frequency_in_mock_data(self, mock_packets):
-        """mock 数据不含高频连接场景。"""
+    def test_high_frequency_detected_in_mock_data(self, mock_packets):
+        """mock 数据（扩充后）含高频连接场景。"""
         alerts = detect(mock_packets)
         hf = [a for a in alerts if a["category"] == "异常高频连接"]
-        assert hf == []
+        assert len(hf) == 1
+        assert hf[0]["src_ip"] == "192.168.1.88"
 
     def test_all_alerts_conform_to_schema(self, mock_packets):
         for a in detect(mock_packets):

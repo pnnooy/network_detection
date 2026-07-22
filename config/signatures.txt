@@ -43,3 +43,21 @@ SIG-009 | 恶意命令 | literal | /bin/cat%20 | TCP | high
 SIG-010 | 恶意命令 | literal | /bin/ls%20 | TCP | high
 SIG-011 | 恶意命令 | literal | /etc/passwd | TCP | high
 SIG-012 | 恶意命令 | literal | /etc/shadow | TCP | high
+
+# --- Webshell 上传 ---
+SIG-013 | Webshell | literal | eval($_POST | TCP | high
+SIG-014 | Webshell | literal | system($_GET | TCP | high
+SIG-015 | Webshell | literal | assert($_REQUEST | TCP | high
+
+# --- 路径遍历 ---
+SIG-016 | 路径遍历 | regex | \.\./\.\./\.\./ | TCP | medium
+SIG-017 | 路径遍历 | literal | ..\\..\\..\\ | TCP | medium
+
+# --- 命令注入 ---
+SIG-018 | 命令注入 | literal | ; wget http | TCP | high
+SIG-019 | 命令注入 | literal | \x7C nc -e /bin | TCP | high
+SIG-020 | 命令注入 | literal | ` id` | TCP | high
+
+# --- XXE / XML 注入 ---
+SIG-021 | XXE注入 | literal | <!ENTITY | TCP | high
+SIG-022 | XXE注入 | literal | SYSTEM "file:/// | TCP | high

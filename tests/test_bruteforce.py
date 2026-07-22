@@ -269,16 +269,17 @@ def mock_packets():
 class TestMockData:
     """基于 Phase1 交付的真实 mock 数据端到端比对。"""
 
-    def test_detects_only_ssh_bruteforce(self, mock_packets):
+    def test_detects_bruteforce(self, mock_packets):
+        """mock 数据应检出 SSH + FTP 暴力破解。"""
         alerts = detect(mock_packets)
-        # mock 数据中唯一的暴力破解场景：192.168.1.99 → 192.168.1.20:22（18 次）
-        assert len(alerts) == 1
-        a = alerts[0]
-        assert a["src_ip"] == "192.168.1.99"
-        assert a["dst_ip"] == "192.168.1.20"
-        assert a["dst_port"] == 22
-        assert a["detector"] == "bruteforce"
-        assert "18" in a["evidence"]
+        # 扩充后：SSH(192.168.1.99:22, 18次) + FTP(192.168.1.98:21, 10次) = 2条
+        assert len(alerts) == 2
+        ssh = [a for a in alerts if a["dst_port"] == 22][0]
+        ftp = [a for a in alerts if a["dst_port"] == 21][0]
+        assert ssh["src_ip"] == "192.168.1.99"
+        assert ftp["src_ip"] == "192.168.1.98"
+        assert "18" in ssh["evidence"]
+        assert "10" in ftp["evidence"]
 
     def test_all_alerts_conform_to_schema(self, mock_packets):
         for a in detect(mock_packets):
