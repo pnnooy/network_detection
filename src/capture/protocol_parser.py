@@ -154,11 +154,16 @@ def _parse_ip_packet(ip_layer, timestamp: str) -> dict | None:
 
     transport_cls = transport.__class__.__name__
 
+    tcp_seq = None
+    tcp_ack = None
+
     if transport_cls == "TCP":
         protocol = "TCP"
         src_port = int(transport.sport)
         dst_port = int(transport.dport)
         flags = _format_tcp_flags(transport)
+        tcp_seq = int(transport.seq) if transport.seq is not None else None
+        tcp_ack = int(transport.ack) if transport.ack is not None else None
         raw_payload = bytes(transport.payload) if transport.payload else b""
     elif transport_cls == "UDP":
         protocol = "UDP"
@@ -186,6 +191,8 @@ def _parse_ip_packet(ip_layer, timestamp: str) -> dict | None:
         "flags": flags,
         "payload": payload,
         "payload_len": payload_len,
+        "tcp_seq": tcp_seq,
+        "tcp_ack": tcp_ack,
     }
     record["flow_id"] = build_flow_id(record)
 

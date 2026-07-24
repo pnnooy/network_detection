@@ -225,3 +225,100 @@ class TestBehaviorCorrelation:
         assert result[0]["behavior_id"] == "preset-1"
         # 后续同组告警继承预设的 behavior_id
         assert result[1]["behavior_id"] == "preset-1"
+
+
+class TestCrossDetectorCorrelation:
+    """协同联动测试（v2）"""
+
+    @staticmethod
+    def _alert(aid, detector, category, src_ip, severity="medium", ts="2026-07-08T10:00:00"):
+        return {
+            "alert_id": aid, "behavior_id": aid,
+            "detector": detector, "category": category,
+            "src_ip": src_ip, "dst_ip": "192.168.1.20", "dst_port": 80,
+            "severity": severity, "description": "", "evidence": "",
+            "timestamp": ts,
+        }
+
+    def test_cross_detector_correlation(self):
+        """同一IP被多个检测器检出时，相互关联。"""
+        from src.gui_alert.correlator import correlate_cross_detector
+
+        alerts = [
+            self._alert("a1", "signature", "SQL注入", "10.0.0.1"),
+            self._alert("a2", "anomaly", "异常外联", "10.0.0.1"),
+            self._alert("a3", "signature", "XSS", "10.0.0.2"),
+        ]
+        result = correlate_cross_detector(alerts)
+        # 10.0.0.1 有 signature+anomaly → 应关联
+        assert len(result[0]["correlated_alerts"]) == 1  # a1 refers to a2
+        assert result[0]["cross_detector_count"] == 2
+        # 10.0.0.2 仅有 signature → 不应有关联
+        assert result[2]["correlated_alerts"] == []
+        assert result[2]["cross_detector_count"] == 1
+
+    def test_attack_stage_assignment(self):
+        """告警应正确标注攻击阶段。"""
+        from src.gui_alert.correlator import detect_attack_chain
+
+        alerts = [
+            self._alert("a1", "anomaly", "端口扫描", "10.0.0.1"),
+            self._alert("a2", "signature", "SQL注入", "10.0.0.1"),
+            self._alert("a3", "anomaly", "异常外联", "10.0.0.1"),
+        ]
+        result = detect_attack_chain(alerts)
+        assert result[0]["attack_stage"] == "reconnaissance"
+        assert result[1]["attack_stage"] == "exploitation"
+        assert result[2]["attack_stage"] == "c2"
+        # 同 IP 形成攻击链
+        assert result[0]["attack_chain_id"] == result[1]["attack_chain_id"]
+
+    def test_severity_escalation(self):
+        """多检测器交叉验证时，低严重度升级。"""
+        from src.gui_alert.correlator import escalate_severity
+
+        alerts = [
+            self._alert("a1", "signature", "SQL注入", "10.0.0.1", severity="low"),
+            self._alert("a2", "anomaly", "异常外联", "10.0.0.1", severity="medium"),
+            self._alert("a3", "signature", "XSS", "10.0.0.2", severity="low"),
+        ]
+        result = escalate_severity(alerts)
+        # 10.0.0.1 有 2 个检测器 → a1 low→medium, a2 medium→high
+        assert result[0]["severity"] == "medium"
+        assert result[1]["severity"] == "high"
+        # 10.0.0.2 仅 1 个检测器 → 不变
+        assert result[2]["severity"] == "low"
+        assert result[2]["escalated"] is False
+
+    def test_correlator_no_false_cross_detector(self):
+        """不同IP的告警不应被误关联。"""
+        from src.gui_alert.correlator import correlate_cross_detector
+
+        alerts = [
+            self._alert("a1", "signature", "SQL注入", "10.0.0.1"),
+            self._alert("a2", "anomaly", "端口扫描", "10.0.0.2"),
+        ]
+        result = correlate_cross_detector(alerts)
+        assert result[0]["correlated_alerts"] == []
+        assert result[1]["correlated_alerts"] == []
+
+    def test_aggregator_includes_new_fields(self):
+        """汇总后的告警应包含协同关联字段。"""
+        from src.gui_alert.aggregator import aggregate as _agg
+        import json, tempfile, os
+
+        alerts = [
+            self._alert("a1", "signature", "SQL注入", "10.0.0.1"),
+            self._alert("a2", "anomaly", "异常外联", "10.0.0.1"),
+        ]
+        with tempfile.TemporaryDirectory() as td:
+            f1 = os.path.join(td, "test1.json")
+            f2 = os.path.join(td, "test2.json")
+            json.dump([alerts[0]], open(f1, "w"))
+            json.dump([alerts[1]], open(f2, "w"))
+            merged = _agg([f1, f2])
+            for a in merged:
+                assert "correlated_alerts" in a
+                assert "attack_stage" in a
+                assert "cross_detector_count" in a
+                assert "original_severity" in a

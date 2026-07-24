@@ -138,6 +138,17 @@ def aggregate(alert_files: list[str]) -> list[dict]:
     # 行为关联
     deduped = correlate_behaviors(deduped)
 
+    # 跨检测器协同联动
+    from .correlator import (
+        correlate_cross_detector,
+        detect_attack_chain,
+        escalate_severity,
+    )
+
+    deduped = correlate_cross_detector(deduped)
+    deduped = detect_attack_chain(deduped)
+    deduped = escalate_severity(deduped)
+
     logger.info("告警汇总完成: 共 %d 条 (去重前 %d 条)", len(deduped), len(all_alerts))
     return deduped
 

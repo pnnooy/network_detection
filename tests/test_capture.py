@@ -158,6 +158,83 @@ class TestTCPReassembly:
         assert len(result) == 1
         assert result[0]["protocol"] == "ICMP"
 
+    # ── v2: 基于序列号的增强重组 ──
+
+    def test_reassemble_with_seq_order(self):
+        """乱序到达的包应按 seq 而非 timestamp 顺序输出（各段独立保留）。"""
+        flow_id = "A:1->B:2/TCP"
+        pkts = [
+            {"timestamp": "T02", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "WORLD", "payload_len": 5, "tcp_seq": 205, "tcp_ack": 0},
+            {"timestamp": "T01", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "HELLO", "payload_len": 5, "tcp_seq": 200, "tcp_ack": 0},
+        ]
+        result = reassemble(pkts)
+        data_pkts = [p for p in result if p.get("protocol") == "TCP"
+                     and p.get("payload_len", 0) > 0 and p.get("flags") != "__GAP__"]
+        # 两个数据段按 seq 顺序输出（HELLO 在前，WORLD 在后，中间无 gap）
+        assert len(data_pkts) == 2
+        assert data_pkts[0]["payload"] == "HELLO"
+        assert data_pkts[1]["payload"] == "WORLD"
+
+    def test_reassemble_detects_gap(self):
+        """seq 间隙应插入 [MISSING N bytes] 标记。"""
+        flow_id = "A:1->B:2/TCP"
+        pkts = [
+            {"timestamp": "T01", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "FIRST", "payload_len": 5, "tcp_seq": 100, "tcp_ack": 0},
+            {"timestamp": "T02", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "SECOND", "payload_len": 6, "tcp_seq": 200, "tcp_ack": 0},
+        ]
+        result = reassemble(pkts)
+        gaps = [p for p in result if p.get("flags") == "__GAP__"]
+        assert len(gaps) >= 1
+        assert "MISSING" in gaps[0]["payload"]
+
+    def test_reassemble_fallback_without_seq(self):
+        """无 tcp_seq 字段时降级为时间戳拼接（向后兼容）。"""
+        flow_id = "A:1->B:2/TCP"
+        pkts = [
+            {"timestamp": "T01", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "PART1", "payload_len": 5},
+            {"timestamp": "T02", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "PART2", "payload_len": 5},
+        ]
+        result = [p for p in reassemble(pkts) if p["protocol"] == "TCP" and p["payload_len"] > 0]
+        assert len(result) == 1
+        assert result[0]["payload"] == "PART1PART2"
+
+    def test_reassemble_bidirectional(self):
+        """双向数据应分开追踪，不混入同一方向。"""
+        flow_id = "A:1->B:2/TCP"
+        pkts = [
+            {"timestamp": "T01", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "request", "flags": "PA",
+             "payload": "CLIENT-DATA", "payload_len": 11, "tcp_seq": 100, "tcp_ack": 0},
+            {"timestamp": "T02", "flow_id": flow_id, "protocol": "TCP",
+             "src_ip": "A", "src_port": 1, "dst_ip": "B", "dst_port": 2,
+             "direction": "response", "flags": "PA",
+             "payload": "SERVER-DATA", "payload_len": 11, "tcp_seq": 500, "tcp_ack": 0},
+        ]
+        result = reassemble(pkts)
+        data_pkts = [p for p in result if p.get("payload_len", 0) > 0 and p.get("flags") != "__GAP__"]
+        payloads = {p.get("payload") for p in data_pkts}
+        assert "CLIENT-DATA" in payloads
+        assert "SERVER-DATA" in payloads
+
 
 class TestMockData:
     """mock_packets.json 数据质量测试"""
