@@ -94,7 +94,12 @@ network_detection/
 │   └── gui_alert/                   # 韩宇飞
 │       ├── __init__.py
 │       ├── aggregator.py            # 汇总各模块告警
-│       └── gui.py                   # 图形界面（规则管理 + 实时告警）
+│       ├── gui.py                   # 图形界面（tkinter 桌面版）
+│       └── web_gui.py               # Web 监控面板（Flask 替代，零依赖）
+├── demo/                            # 韩宇飞 — 真实攻击演示
+│   ├── target_server.py             # 有漏洞的 HTTP 靶机服务
+│   ├── run_live_demo.sh             # 一键演示脚本
+│   └── attack_scripts/              # 9 个攻击脚本
 ├── mock_data/
 │   └── mock_packets.json            # 李哲在 Phase1 交付的模拟报文数据
 ├── results/                          # 告警输出目录（各模块产出 + 汇总）
@@ -153,8 +158,10 @@ network_detection/
 
 - **实际完成**：
   - `aggregator.py`：合并/排序/去重 + `correlate_behaviors()` 行为关联（同源同类时间相近 → 共享 behavior_id）
-  - `gui.py`：tkinter 三页签（告警监控 / 特征库管理 / 统计概览），零外部依赖
-  - `main.py`：全链路入口，一键运行 `python main.py --input mock_data/mock_packets.json`
+  - `gui.py`：tkinter 桌面版 GUI，三页签（告警监控 / 特征库管理 / 统计概览），零外部依赖
+  - `web_gui.py`：Web 版监控面板，M-VQA 同款视觉风格（teal/cyan 渐变、毛玻璃导航、响应式布局），基于 Python http.server 标准库零额外依赖，API: `/api/alerts`, `/api/signatures`, `/api/stats`, `/api/reload`
+  - `main.py`：全链路入口，`--gui-only` 启动桌面版 / `--web` 启动 Web 版 / 默认运行检测管线
+  - `demo/`：靶机服务 + 9 个攻击脚本 + 一键演示脚本
 - **接口规范**：`docs/interface_spec.md` 定义报文记录格式、统一告警格式、函数签名、CLI 调用约定、日志规范
 - **测试**：`tests/test_gui_aggregator.py`（20 个测试）
 - 输出：`results/merged_alerts.json`（含 `behavior_id`）+ 图形界面
@@ -321,7 +328,7 @@ git push origin feature/signature-engine
 | **缓冲** | 应对意外问题 | 8/3(一) ~ 8/4(二) | — |
 | **📅 官方截止** | 结题报告提交截止 | 8/5(三) | — |
 
-> **Phase 2.5 已完成**（7/22）：韩宇飞审核 PR #2（anomaly）和 PR #3（signature），修复问题并补写测试后全部合入 main。全量 148 测试全绿，接口格式已验证通过。
+> **Phase 3 完成 + Phase 4 启动**（7/22 晚）：mock 数据扩充至 426 条 / 特征规则 27 条 / 30 条行为告警 / 全量 148 测试全绿。Web 监控面板上线 (`python main.py --web`)。真实攻击演示脚本已就绪 (`demo/`)，7/23-7/25 韩宇飞进行靶机验证。
 
 ### Commit message 规范
 
@@ -347,8 +354,9 @@ git push origin feature/signature-engine
 2. 组长（韩宇飞）完成 Code Review，修复问题后合并
 3. **✅ Phase1~3 全部完成**：5 人全部模块已合入 main，148 测试全绿
 4. **Phase 4 联调**（7/23 周四起）：
-   - **Mock 数据全链路**已跑通：426 条报文 → 27 条规则 → 30 条行为告警
-   - **真实攻击演示**：搭建本地靶机，用攻击脚本发起真实流量，scapy 抓包 → 检测引擎 → GUI 实时告警（7/23-7/25 韩宇飞搭建验证）
+   - **Mock 数据全链路**已跑通：426 条报文 → 27 条规则 → 30 条行为告警（signature 16 + bruteforce 3 + anomaly 11）
+   - **Web 监控面板**已上线：`python main.py --web` 启动，M-VQA 同款视觉风格，浏览器访问 `http://127.0.0.1:8099`
+   - **真实攻击演示**：搭建本地靶机 + 9 个攻击脚本 + 一键演示 `sudo bash demo/run_live_demo.sh`（7/23-7/25 韩宇飞搭建验证）
 5. 联调中发现的问题以 Issue 形式记录 → 原模块负责人修复 → 重新提交 → 再次合并
 
 ---
@@ -429,7 +437,7 @@ git push origin feature/signature-engine
 | 7/9(四) ~ 7/12(日) | 李哲交付 mock 数据 + capture 模块 | ✅ 已完成 |
 | 7/13(一) ~ 7/18(六) | 四人完成核心检测逻辑 | ✅ 已完成 |
 | 7/20(一) ~ 7/22(三) | 单元测试 + PR 审核合入（148 测试全绿） | ✅ 已完成 |
-| 7/22(三) | 扩充 mock 数据 426 条 + 27 规则 + 30 告警 | ✅ 已完成 |
+| 7/22(三) | 扩充 mock 426 条 + 27 规则 + 30 告警 + Web 监控面板 | ✅ 已完成 |
 | 7/23(四) ~ 7/25(六) | 🚀 真实攻击靶机搭建 + 抓包联调验证 | 📋 韩宇飞进行中 |
 | 7/26(日) ~ 7/27(一) | PPT + 演示数据准备 + 录制演示视频 | 📋 待开始 |
 | 7/28(二) | **内部预演**，发现并修正问题 | — |
@@ -454,4 +462,4 @@ git push origin feature/signature-engine
 ---
 
 > **文档维护者**：韩宇飞（组长）
-> **最后更新**：2026-07-22（Phase3 完成 + 真实攻击演示方案已规划，426条/27规则/30告警/148测试全绿）
+> **最后更新**：2026-07-22 晚（Phase3 全部完成 + Web 面板上线 + 真实攻击演示方案就绪；426条/27规则/30告警/148测试全绿）
