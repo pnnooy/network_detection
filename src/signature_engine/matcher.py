@@ -47,26 +47,44 @@ def detect(packets: list[dict], signatures: list[dict] | None = None) -> list[di
 
 
 def _match_signature(payload: str, protocol: str, signatures: list[dict]):
-    """对单个报文的 payload 找第一条命中的规则（一个包最多命中一条）。"""
-    for sig in signatures:
-        sig_proto = sig.get("protocol", "*")
-        if sig_proto != "*" and protocol.upper() not in sig_proto.upper().split("/"):
-            continue
+    """对单个报文的 payload 找第一条命中的规则（一个包最多命中一条）。
 
-        pattern = sig.get("pattern", "")
-        match_mode = sig.get("match_mode", "literal")
+    同时匹配原始 payload 和 URL 解码后的版本，以覆盖 curl 等工具
+    发送的 URL 编码攻击载荷（如 %3Cscript%3E → <script>）。
+    """
+    from urllib.parse import unquote
 
-        if match_mode == "literal":
-            # 子串匹配，大小写不敏感
-            if pattern.lower() in payload.lower():
-                return sig
-        elif match_mode == "regex":
-            try:
-                if re.search(pattern, payload, re.IGNORECASE):
-                    return sig
-            except re.error as e:
-                logger.warning("规则 %s 的正则匹配失败，跳过该规则: %s", sig.get("rule_id", "?"), e)
+    decoded_payload = unquote(payload)
+
+    def _try_match(candidate: str) -> dict | None:
+        for sig in signatures:
+            sig_proto = sig.get("protocol", "*")
+            if sig_proto != "*" and protocol.upper() not in sig_proto.upper().split("/"):
                 continue
+
+            pattern = sig.get("pattern", "")
+            match_mode = sig.get("match_mode", "literal")
+
+            if match_mode == "literal":
+                # 子串匹配，大小写不敏感
+                if pattern.lower() in candidate.lower():
+                    return sig
+            elif match_mode == "regex":
+                try:
+                    if re.search(pattern, candidate, re.IGNORECASE):
+                        return sig
+                except re.error as e:
+                    logger.warning("规则 %s 的正则匹配失败，跳过该规则: %s",
+                                   sig.get("rule_id", "?"), e)
+                    continue
+        return None
+
+    # 先试原始 payload，再试 URL 解码版本
+    result = _try_match(payload)
+    if result:
+        return result
+    if decoded_payload != payload:
+        return _try_match(decoded_payload)
     return None
 
 

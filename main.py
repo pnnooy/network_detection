@@ -5,8 +5,8 @@
     # 运行全链路（mock 数据）
     python main.py --input mock_data/mock_packets.json
 
-    # 实时抓包模式（Phase4+）
-    python main.py --live --interface eth0
+    # 实时抓包 + 检测（配合 live_capture.py）
+    python main.py --watch 3 --input results/live_capture.json
 
     # 仅运行 GUI（读取已有告警）
     python main.py --gui-only
@@ -16,6 +16,7 @@ import argparse
 import json
 import logging
 import sys
+import time
 from pathlib import Path
 
 # 将项目根目录加入 sys.path，确保模块可导入
@@ -26,13 +27,15 @@ from src.gui_alert.aggregator import aggregate, save_merged
 logger = logging.getLogger(__name__)
 
 
-def run_detection_pipeline(input_file: str, output_dir: str = "results") -> dict[str, str]:
+def run_detection_pipeline(input_file: str, output_dir: str = "results",
+                          packets: list[dict] | None = None) -> dict[str, str]:
     """
     运行完整的检测管线：调用 B/C/D 三个模块。
 
     Args:
         input_file: 输入报文 JSON 文件路径
         output_dir: 输出目录
+        packets: 预加载的报文列表，为 None 时从 input_file 读取
 
     Returns:
         {模块名: 输出文件路径} 的映射
@@ -41,8 +44,9 @@ def run_detection_pipeline(input_file: str, output_dir: str = "results") -> dict
     from src.bruteforce_detect.login_monitor import detect as bf_detect
     from src.anomaly_detect.anomaly_detector import detect as anom_detect
 
-    with open(input_file, "r", encoding="utf-8") as f:
-        packets = json.load(f)
+    if packets is None:
+        with open(input_file, "r", encoding="utf-8") as f:
+            packets = json.load(f)
 
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -76,11 +80,87 @@ def run_detection_pipeline(input_file: str, output_dir: str = "results") -> dict
     return outputs
 
 
+def watch_loop(input_file: str, output_dir: str, interval: int) -> None:
+    """
+    持续监控模式：每 interval 秒重新读取 capture 文件并运行检测。
+
+    仅当文件更新时（文件大小/内容变化）才触发检测，避免重复计算。
+
+    Args:
+        input_file: 监测的 capture JSON 文件路径
+        output_dir: 输出目录
+        interval: 轮询间隔（秒）
+    """
+    import os
+
+    last_size = -1
+    cycle = 0
+    logger.info("Watch 模式启动: interval=%ds, monitoring=%s", interval, input_file)
+    print(f"\n  [Watch] 监控中 {input_file} (每 {interval}s 检测一次)")
+
+    while True:
+        try:
+            time.sleep(interval)
+            cycle += 1
+
+            if not os.path.exists(input_file):
+                continue
+
+            current_size = os.path.getsize(input_file)
+            force = (cycle % 10 == 0)  # 每 10 轮强制重检
+            if current_size == last_size and last_size >= 0 and not force:
+                continue
+            last_size = current_size
+
+            with open(input_file, "r", encoding="utf-8") as f:
+                packets = json.load(f)
+
+            # 若有清空基线，只检测基线之后的新包
+            baseline_file = Path(output_dir) / "baseline_count.txt"
+            if baseline_file.exists():
+                try:
+                    baseline = int(baseline_file.read_text().strip())
+                    if baseline > 0 and baseline < len(packets):
+                        packets = packets[baseline:]
+                    elif baseline >= len(packets):
+                        packets = []
+                except (ValueError, FileNotFoundError):
+                    pass
+
+            if not packets:
+                continue
+
+            outputs = run_detection_pipeline(input_file, output_dir, packets=packets)
+
+            # 汇总
+            merged = aggregate(list(outputs.values()))
+            merged_path = Path(output_dir) / "merged_alerts.json"
+            save_merged(merged, str(merged_path))
+
+            total_alerts = len(merged)
+            # 从 output dict 取 count（run_detection_pipeline 不直接返回 count，用 len 读文件）
+            sig_cnt = len(json.load(open(outputs["signature"], encoding="utf-8")))
+            bf_cnt = len(json.load(open(outputs["bruteforce"], encoding="utf-8")))
+            anom_cnt = len(json.load(open(outputs["anomaly"], encoding="utf-8")))
+            ts = time.strftime("%H:%M:%S")
+            print(f"  [{ts}] {len(packets)} pkts -> {total_alerts} alerts (sig={sig_cnt} bf={bf_cnt} anom={anom_cnt})", flush=True)
+
+        except json.JSONDecodeError:
+            pass  # 文件正在写入中，等下一轮
+        except KeyboardInterrupt:
+            print("\n  [Watch] 已停止")
+            break
+        except Exception as e:
+            logger.error("Watch 轮询异常: %s", e)
+
+
 def main():
     parser = argparse.ArgumentParser(description="网络攻击检测系统")
     parser.add_argument("--input", default="mock_data/mock_packets.json", help="输入报文 JSON 文件路径")
     parser.add_argument("--output-dir", default="results", help="告警输出目录")
-    parser.add_argument("--live", action="store_true", help="实时抓包模式（Phase4+）")
+    parser.add_argument("--watch", type=int, default=0, metavar="SEC",
+                        help="持续监控模式：每 SEC 秒检测一次（如 --watch 3）")
+    parser.add_argument("--live", action="store_true", help="实时抓包模式（已废弃，请用 demo/live_capture.py）")
     parser.add_argument("--interface", default="eth0", help="实时抓包网卡名称")
     parser.add_argument("--gui-only", action="store_true", help="仅启动 GUI（tkinter 桌面版，不运行检测）")
     parser.add_argument("--web", action="store_true", help="启动 Web 监控面板（浏览器访问）")
@@ -96,32 +176,32 @@ def main():
 
     if args.gui_only:
         from src.gui_alert.gui import launch_gui
-
         launch_gui()
         return
 
     if args.web:
         from src.gui_alert.web_gui import main as web_main
-
-        # 将端口参数传递给 web_gui 的 CLI 解析器
         sys.argv = ["web_gui", "--port", str(args.web_port)]
         web_main()
         return
 
     if args.live:
-        logger.error("实时抓包模式尚未实现，请等待 Phase4")
+        logger.error("--live 已废弃，请用: python demo/live_capture.py")
         sys.exit(1)
 
-    # 默认：运行检测管线 + 汇总
+    # 持续监控模式
+    if args.watch > 0:
+        watch_loop(args.input, args.output_dir, args.watch)
+        return
+
+    # 默认：单次检测管线 + 汇总
     logger.info("=== 网络攻击检测系统启动 ===")
     outputs = run_detection_pipeline(args.input, args.output_dir)
 
-    # 汇总告警
     merged = aggregate(list(outputs.values()))
     merged_path = Path(args.output_dir) / "merged_alerts.json"
     save_merged(merged, str(merged_path))
 
-    # 打印摘要
     print("\n" + "=" * 50)
     print("检测完成摘要")
     print("=" * 50)

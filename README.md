@@ -45,7 +45,7 @@
 | **依赖安装** | `pip install -r requirements.txt` |
 | **代码格式化** | 推荐使用 `black` + `isort` 统一风格（可选但强烈建议） |
 
-### 2.1 快速开始（3 条命令跑通全链路）
+### 2.1 快速开始
 
 ```bash
 # 1. 安装依赖（仅需一次）
@@ -58,13 +58,34 @@ python main.py --input mock_data/mock_packets.json
 python main.py --web
 ```
 
+### 2.2 跨机器实时攻击演示（Windows + Kali VM）
+
+> 完整流程见 [[项目进度 2026-07-27]]
+
+**Windows 端**（双击启动）：
+```batch
+demo\start_demo.bat
+# → 自动开启 4 个窗口：靶机 + 抓包 + 持续检测 + Web 面板 + 浏览器
+```
+
+**Kali 端**（交互式攻击菜单）：
+```bash
+cd ~/network_detection
+TARGET=192.168.235.1:8080 TARGET_IP=192.168.235.1 bash demo/attack_menu.sh
+# 按 1-9 执行单类攻击 | A 一键全部 | Q 退出
+```
+
+**Web 面板**提供 Mock/Live 双模式：
+- **Mock 演示**：预置 426 条报文 → 重跑检测 → 30 条告警
+- **实时抓包**：每 2s 自动刷新，Kali 攻击时告警实时弹出
+
 其他启动方式：
 
 ```bash
-python main.py --gui-only                              # tkinter 桌面版 GUI
-python -m pytest tests/ -v                             # 运行全量测试 (157 passed)
-sudo bash demo/run_live_demo.sh                        # Linux 真实攻击演示（需 root）
-python scripts/add_seq_to_mock.py                      # 为 mock 数据注入 TCP 序列号
+python main.py --watch 3 --input results/live_capture.json  # 持续检测（每3s）
+python demo/live_capture.py results/live_capture.json 300    # 只抓包（CAPTURE_IFACE 环境变量指定网卡）
+python main.py --gui-only                                   # tkinter 桌面版 GUI
+python -m pytest tests/ -v                                  # 运行全量测试 (157 passed)
 ```
 
 ---
@@ -120,7 +141,11 @@ network_detection/
 │       └── web_gui.py               # Web 监控面板（Flask 替代，零依赖）
 ├── demo/                            # 韩宇飞 — 真实攻击演示
 │   ├── target_server.py             # 有漏洞的 HTTP 靶机服务
-│   ├── run_live_demo.sh             # 一键演示脚本
+│   ├── live_capture.py              # Windows Npcap 抓包
+│   ├── attack_menu.sh               # Kali 交互式攻击菜单
+│   ├── start_demo.bat               # Windows 一键启动
+│   ├── run_live_demo.sh             # Linux lo 回环演示
+│   ├── run_live_demo.ps1            # PowerShell 自动编排
 │   └── attack_scripts/              # 9 个攻击脚本
 ├── mock_data/
 │   └── mock_packets.json            # 李哲在 Phase1 交付的模拟报文数据
@@ -180,13 +205,13 @@ network_detection/
 
 - **实际完成**：
   - `aggregator.py`：合并/排序/去重 + `correlate_behaviors()` 行为关联（同源同类时间相近 → 共享 behavior_id）
-  - `gui.py`：tkinter 桌面版 GUI，三页签（告警监控 / 特征库管理 / 统计概览），零外部依赖
-  - `web_gui.py`：Web 版监控面板，M-VQA 同款视觉风格（teal/cyan 渐变、毛玻璃导航、响应式布局），基于 Python http.server 标准库零额外依赖，API: `/api/alerts`, `/api/signatures`, `/api/stats`, `/api/reload`
-  - `main.py`：全链路入口，`--gui-only` 启动桌面版 / `--web` 启动 Web 版 / 默认运行检测管线
-  - `demo/`：靶机服务 + 9 个攻击脚本 + 一键演示脚本
-- **接口规范**：`docs/interface_spec.md` 定义报文记录格式、统一告警格式、函数签名、CLI 调用约定、日志规范
-- **测试**：`tests/test_gui_aggregator.py`（20 个测试）
-- 输出：`results/merged_alerts.json`（含 `behavior_id`）+ 图形界面
+  - `correlator.py`：跨检测器协同联动（6条关联）+ 攻击链识别（20条链/30条标注）+ 严重度升级（4条），落实老师建议
+  - `gui.py`：tkinter 桌面版 GUI
+  - `web_gui.py`：Web 监控面板，Mock/Live 双模式切换，2s 自动刷新，清空+基线机制，M-VQA teal/cyan 视觉风格
+  - `main.py`：`--watch N` 持续检测模式，`--web` Web面板，`--gui-only` 桌面版
+  - `demo/`：靶机服务 + 9攻击脚本 + 一键演示 + 交互式攻击菜单（跨机器 Kali→Windows）
+  - `demo/live_capture.py`：Windows Npcap 抓包，边抓边存，SIGTERM 安全
+  - **Bug 修复**：`matcher.py` URL 解码匹配（curl %3C→`<script>`），`run_live_demo.sh` 变量名/接口可配置
 
 ### 测试覆盖总览
 
@@ -383,72 +408,50 @@ git push origin feature/signature-engine
 
 ---
 
-## 十、真实攻击演示方案（Phase 4 核心）
+## 十、真实攻击演示方案（已完成）
 
-> **目标**：答辩时同时展示「模拟数据离线检测」+「真实攻击实时检测」，体现系统在真实流量下的检测能力。
+> **2026-07-27 更新**：跨机器演示环境已搭建完成并验证通过。Windows 端 Npcap 抓包 + Kali 端执行攻击，Web 面板 Mock/Live 双模式。
 
-### 10.1 演示架构
+### 10.1 演示架构（跨机器）
 
 ```
-┌──────────────────── 单台 Linux 虚拟机 / WSL2 ────────────────────┐
-│                                                                    │
-│  攻击脚本 (attack_scripts/)         靶机服务 (target_server.py)     │
-│  ├─ sql_injection.sh    curl ───→  :8080/login.php (Python HTTP)  │
-│  ├─ xss.sh              curl ───→  :8080/comment                  │
-│  ├─ path_traversal.sh   curl ───→  :8080/download                 │
-│  ├─ ssh_bruteforce.sh  hydra ───→  :22 (sshd)                     │
-│  └─ port_scan.sh        nmap ───→  :1-1000                        │
-│       │                            │                               │
-│       └── 攻击流量 ──── lo 接口 ────┘                               │
-│                       │                                            │
-│                       ▼                                            │
-│          capture 模块 (scapy 抓包 lo)                               │
-│                       │                                            │
-│                       ▼                                            │
-│          B/C/D 检测引擎 → aggregator → GUI                          │
-└────────────────────────────────────────────────────────────────────┘
+┌── Windows 11 (宿主机) ────────┐    ┌── Kali Linux (VMware VM) ──┐
+│  target_server.py    :8080    │    │  attack_menu.sh            │
+│  live_capture.py ← VMnet8     │←───│  9 类攻击 ──→ Win:8080    │
+│  main.py --watch N  持续检测  │    │  IP: 192.168.235.133      │
+│  main.py --web       Web面板  │    └───────────────────────────┘
+│  OpenSSH Server       :22     │      VMware NAT (VMnet8)
+│  IP: 192.168.235.1            │
+└───────────────────────────────┘
 ```
 
-### 10.2 文件清单
+### 10.2 快速启动
+
+| 平台 | 命令 | 说明 |
+|------|------|------|
+| Windows | 双击 `demo/start_demo.bat` | 自动启动靶机+抓包+watch+Web+浏览器 |
+| Kali | `TARGET=192.168.235.1:8080 bash demo/attack_menu.sh` | 交互菜单，按数字单步攻击 |
+
+### 10.3 新增文件
 
 | 文件 | 说明 |
 |------|------|
-| `demo/target_server.py` | 靶机 HTTP 服务（模拟有漏洞的 Web 应用），监听 `0.0.0.0:8080` |
-| `demo/attack_scripts/sql_injection.sh` | SQL 注入攻击（UNION SELECT / ' OR 1=1 / DROP TABLE） |
-| `demo/attack_scripts/xss.sh` | XSS 攻击（`<script>alert(1)</script>` 等） |
-| `demo/attack_scripts/path_traversal.sh` | 路径遍历攻击（`../../../etc/passwd` 等） |
-| `demo/attack_scripts/cmd_injection.sh` | 命令注入攻击（`; wget` / `\| nc` 等） |
-| `demo/attack_scripts/ssh_bruteforce.sh` | SSH 暴力破解（hydra 或手动循环 ssh） |
-| `demo/attack_scripts/port_scan.sh` | 端口扫描（nmap 或手动循环 nc） |
-| `demo/run_live_demo.sh` | 一键启动：靶机服务 + 开始抓包 + 执行攻击 |
+| `demo/live_capture.py` | Windows Npcap 抓包，边抓边存，`CAPTURE_IFACE` 环境变量传接口名 |
+| `demo/attack_menu.sh` | Kali 交互式攻击菜单 (1-9 单步 / A 全部 / Q 退出) |
+| `demo/start_demo.bat` | Windows 一键启动 |
+| `demo/run_live_demo.ps1` | PowerShell 版自动编排（备用） |
+| `demo/attack_scripts/webshell.sh` | Webshell 上传（新增） |
+| `demo/attack_scripts/trojan.sh` | 木马通信（新增） |
+| `demo/attack_scripts/xxe.sh` | XXE 注入（新增） |
 
-### 10.3 环境要求
+### 10.4 主要功能
 
-| 项目 | 要求 |
+| 功能 | 说明 |
 |------|------|
-| 操作系统 | Linux（Ubuntu 22.04 推荐）或 WSL2 |
-| Python | ≥ 3.9 |
-| 系统包 | `scapy`、`openssh-server` |
-| 权限 | root（scapy 抓包需要） |
-| 可选 | `hydra`（SSH 爆破）、`nmap`（端口扫描），也可用纯 shell 替代 |
-
-### 10.4 演示流程（约 5 分钟）
-
-| 步骤 | 内容 | 时长 |
-|------|------|------|
-| 1 | 展示 mock 数据全链路结果（30 条告警） | 1 min |
-| 2 | 启动靶机 HTTP 服务 + 开始抓包 | 30 s |
-| 3 | 逐条执行攻击脚本，GUI 实时弹出告警 | 2 min |
-| 4 | 对比 mock 告警 vs 真实抓包告警 | 1 min |
-| 5 | 总结：统一接口、即插即用、双引擎互补 | 30 s |
-
-### 10.5 防翻车预案
-
-- **Plan A**：现场 live demo（Linux 虚拟机，提前配置好环境）
-- **Plan B**：提前录制演示视频（全程录屏 + 旁白），现场播放 + 补充讲解
-- 录制工具推荐：OBS Studio 或 Linux `peek` / `kazam`
-
----
+| Web Mock/Live 双模式 | Mock=预置426条30告警, Live=实时抓包自动刷新 |
+| 持续检测 `--watch N` | 每 N 秒检测一次，基线机制跳过旧包 |
+| `matcher.py` URL 解码 | curl 发送的 %3Cscript%3E 自动解码为 `<script>` 匹配 |
+| 清空+基线 | 点清空记录当前包数，后续只检测新包 |
 
 ## 十一、时间计划表
 
@@ -484,4 +487,4 @@ git push origin feature/signature-engine
 ---
 
 > **文档维护者**：韩宇飞（组长）
-> **最后更新**：2026-07-22 晚（Phase3 全部完成 + Web 面板上线 + 真实攻击演示方案就绪；426条/27规则/30告警/148测试全绿）
+> **最后更新**：2026-07-27（跨机器演示完成 + 实时检测 + Web 双模式 + 攻击菜单；URL 解码匹配修复；清空基线机制）

@@ -85,14 +85,36 @@ def get_stats() -> dict:
     }
 
 
-def run_detection_pipeline() -> dict:
-    """重新运行检测管线并返回结果。"""
+def run_detection_pipeline(mode: str = "mock") -> dict:
+    """重新运行检测管线并返回结果。
+
+    Args:
+        mode: "mock" — 检测预置 mock 数据；"live" — 检测实时抓包数据
+    """
     from src.signature_engine.matcher import detect as sig_detect
     from src.bruteforce_detect.login_monitor import detect as bf_detect
     from src.anomaly_detect.anomaly_detector import detect as anom_detect
 
-    with open(MOCK_PATH, "r", encoding="utf-8") as f:
+    input_path = MOCK_PATH if mode == "mock" else (RESULTS_DIR / "live_capture.json")
+    if not input_path.exists():
+        raise FileNotFoundError(f"输入文件不存在: {input_path}")
+
+    with open(input_path, "r", encoding="utf-8") as f:
         packets = json.load(f)
+
+    # 若有清空基线，只检测基线之后的新包
+    if mode == "live":
+        baseline_file = RESULTS_DIR / "baseline_count.txt"
+        if baseline_file.exists():
+            try:
+                baseline = int(baseline_file.read_text().strip())
+                if baseline > 0 and baseline < len(packets):
+                    packets = packets[baseline:]
+                    logger.info("基线过滤: 跳过 %d 条旧包, 检测 %d 条新包", baseline, len(packets))
+                elif baseline >= len(packets):
+                    packets = []
+            except (ValueError, FileNotFoundError):
+                pass
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     results = {}
@@ -114,6 +136,7 @@ def run_detection_pipeline() -> dict:
         json.dump(merged, f, ensure_ascii=False, indent=2)
 
     return {
+        "mode": mode,
         "modules": results,
         "merged_count": len(merged),
         "packet_count": len(packets),
@@ -195,9 +218,32 @@ class WebGUIHandler(SimpleHTTPRequestHandler):
         except json.JSONDecodeError:
             data = {}
 
+        if path == "/api/clear":
+            for f in RESULTS_DIR.glob("*_alerts.json"):
+                f.unlink()
+            merged = RESULTS_DIR / "merged_alerts.json"
+            if merged.exists():
+                merged.unlink()
+            # 记录当前抓包文件中的包数作为基线，后续只检测超出基线的新包
+            live_input = RESULTS_DIR / "live_capture.json"
+            baseline_file = RESULTS_DIR / "baseline_count.txt"
+            if live_input.exists():
+                try:
+                    with open(live_input, "r", encoding="utf-8") as f:
+                        pkts = json.load(f)
+                    with open(baseline_file, "w", encoding="utf-8") as f:
+                        f.write(str(len(pkts)))
+                except Exception:
+                    baseline_file.unlink(missing_ok=True)
+            return self._send_json({"status": "ok", "message": "records cleared", "baseline": len(pkts) if live_input.exists() else 0})
+
         if path == "/api/reload":
-            result = run_detection_pipeline()
-            return self._send_json({"status": "ok", **result})
+            mode = parse_qs(parsed.query).get("mode", ["mock"])[0]
+            try:
+                result = run_detection_pipeline(mode)
+                return self._send_json({"status": "ok", **result})
+            except FileNotFoundError as e:
+                return self._send_json({"status": "error", "message": str(e)}, 404)
 
         if path == "/api/signatures/add":
             from src.signature_engine.signature_db import add_signature
@@ -341,6 +387,15 @@ body {
 }
 .btn-outline:hover { background: var(--primary-50); }
 .btn-sm { padding: 6px 14px; font-size: 0.8125rem; }
+
+/* Mode toggle */
+.mode-toggle { display:flex; align-items:center; background:var(--gray-100); border-radius:100px; padding:3px; }
+.mode-btn {
+  padding:6px 14px; border:none; border-radius:100px; font-size:0.8125rem;
+  font-weight:600; font-family:var(--font-ui); cursor:pointer;
+  background:transparent; color:var(--gray-600); transition:all 0.2s ease;
+}
+.mode-btn.active { background:var(--gradient-primary); color:white; box-shadow:var(--shadow); }
 .btn-danger { background: #dc3545; color: white; }
 .btn-danger:hover { background: #c82333; transform: translateY(-2px); }
 
@@ -627,7 +682,10 @@ body {
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
-.animate-in { animation: fadeInUp 0.5s ease both; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+@keyframes alertPopIn { 0% { transform:scale(0.95); opacity:0; background:#fef2f2; } 100% { transform:scale(1); opacity:1; } }
+@keyframes statFlash { 0% { box-shadow: 0 0 0 0 rgba(13,148,136,0.4); } 100% { box-shadow: 0 0 0 12px rgba(13,148,136,0); } }
+.animate-in { animation: statFlash 0.6s ease-out; }
 
 /* ── Empty state ─────────────────────────────────────── */
 .empty-state { text-align: center; padding: 60px 20px; color: var(--gray-400); }
@@ -663,12 +721,22 @@ body {
       <li><button data-tab="signatures"><i class="fa-solid fa-fingerprint"></i> 特征库</button></li>
       <li><button data-tab="stats"><i class="fa-solid fa-chart-pie"></i> 统计概览</button></li>
     </ul>
-    <div class="nav-actions">
-      <button class="btn btn-outline btn-sm" onclick="loadAll()" title="刷新数据">
-        <i class="fa-solid fa-rotate"></i> 刷新
+    <div class="nav-actions" style="display:flex;align-items:center;gap:8px">
+      <!-- Mode toggle -->
+      <div class="mode-toggle">
+        <button class="mode-btn" id="btnMockMode" onclick="switchMode('mock')">Mock 演示</button>
+        <button class="mode-btn active" id="btnLiveMode" onclick="switchMode('live')">实时抓包</button>
+      </div>
+      <span id="liveDot" style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;animation:pulse 1.5s infinite" title="实时"></span>
+      <span id="lastUpdate" style="font-size:0.75rem;color:var(--gray-500);font-family:var(--font-ui)">就绪</span>
+      <button class="btn btn-outline btn-sm" onclick="toggleAutoRefresh()" id="btnAutoRefresh" title="切换自动刷新">
+        <i class="fa-solid fa-rotate"></i> <span id="btnAutoLabel">暂停</span>
       </button>
-      <button class="btn btn-primary btn-sm" onclick="reloadPipeline()" title="重新运行检测管线">
+      <button class="btn btn-primary btn-sm" onclick="reloadPipeline()" title="运行检测管线">
         <i class="fa-solid fa-play"></i> 重跑检测
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="clearRecords()" id="btnClear" title="清空告警记录重新开始">
+        <i class="fa-solid fa-broom"></i> 清空
       </button>
     </div>
   </div>
@@ -680,7 +748,7 @@ body {
 <section class="hero">
   <div class="hero-content">
     <h1>网络攻击行为检测系统</h1>
-    <p class="hero-subtitle">融合特征匹配与异常行为分析 · 双引擎互补 · 行为聚合告警</p>
+    <p class="hero-subtitle" id="heroSubtitle">实时抓包分析 · 每 3s 持续检测 · 跨机器攻击演示</p>
     <div class="hero-stats" id="heroStats">
       <div class="hero-stat"><i class="fa-solid fa-file-shield"></i><div><div class="hero-stat-val" id="heroAlerts">—</div><div class="hero-stat-label">行为告警</div></div></div>
       <div class="hero-stat"><i class="fa-solid fa-fingerprint"></i><div><div class="hero-stat-val" id="heroRules">—</div><div class="hero-stat-label">特征规则</div></div></div>
@@ -836,6 +904,7 @@ body {
    ═══════════════════════════════════════════════════════════════ */
 let alerts = [], signatures = [], stats = {};
 let selectedAlertId = null;
+let currentMode = 'live';  // 'mock' | 'live'
 
 /* ═══════════════════════════════════════════════════════════════
    Tab switching & Navbar
@@ -866,9 +935,15 @@ async function loadAll() {
 
 async function loadAlerts() {
   try {
-    const r = await fetch('/api/alerts'); alerts = await r.json();
+    const r = await fetch('/api/alerts');
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    alerts = await r.json();
+    if (!Array.isArray(alerts)) { console.warn('loadAlerts: not array', alerts); alerts = []; }
     document.getElementById('heroAlerts').textContent = alerts.length;
-  } catch(e) { console.error(e); }
+  } catch(e) {
+    console.error('loadAlerts failed:', e);
+    document.getElementById('heroAlerts').textContent = 'ERR';
+  }
 }
 async function loadSignatures() {
   try {
@@ -882,13 +957,77 @@ async function loadStats() {
   } catch(e) { console.error(e); }
 }
 
-async function reloadPipeline() {
-  showToast('正在重新运行检测管线...', 'success');
+function switchMode(mode) {
+  currentMode = mode;
+  // Toggle active CSS class
+  document.getElementById('btnMockMode').classList.toggle('active', mode === 'mock');
+  document.getElementById('btnLiveMode').classList.toggle('active', mode === 'live');
+
+  const dot = document.getElementById('liveDot');
+  dot.style.background = mode === 'live' ? '#22c55e' : '#f59e0b';
+  dot.style.animation = mode === 'live' ? 'pulse 1.5s infinite' : 'none';
+
+  document.getElementById('heroSubtitle').textContent = mode === 'live'
+    ? '实时抓包分析 * 持续检测 * 跨机器攻击演示'
+    : '预置 426 条报文 * 27 条特征规则 * 全链路检测演示';
+
+  if (mode === 'mock') {
+    stopAutoRefresh();
+    document.getElementById('btnAutoLabel').textContent = '已停';
+    document.getElementById('lastUpdate').textContent = '手动模式';
+    document.getElementById('btnClear').style.display = 'none';
+    document.getElementById('btnAutoRefresh').style.display = 'none';
+  }
+  if (mode === 'live') {
+    document.getElementById('btnAutoLabel').textContent = '暂停';
+    document.getElementById('btnClear').style.display = '';
+    document.getElementById('btnAutoRefresh').style.display = '';
+    startAutoRefresh();
+    document.getElementById('lastUpdate').textContent = '等待数据...';
+  }
+  loadAll();
+}
+
+async function clearRecords() {
+  console.log('[clear] starting...');
+  const wasAuto = autoRefresh;
+  if (wasAuto) stopAutoRefresh();  // 暂停避免渲染冲突
   try {
-    const r = await fetch('/api/reload', { method: 'POST' });
+    const r = await fetch('/api/clear', { method: 'POST' });
     const result = await r.json();
+    console.log('[clear] response:', result);
+    if (result.status === 'ok') {
+      alerts = []; totalAlertsSeen = 0;
+      showToast('记录已清空', 'success');
+      document.getElementById('heroAlerts').textContent = '0';
+      await loadAll();
+      totalAlertsSeen = alerts.length;
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+      console.log('[clear] done, alerts:', alerts.length);
+    } else {
+      showToast('清空失败: ' + (result.message || 'unknown'), 'error');
+    }
+  } catch(e) {
+    console.error('[clear] error:', e);
+    showToast('清空失败: ' + e, 'error');
+  }
+  if (wasAuto && currentMode === 'live') startAutoRefresh();  // 恢复
+}
+
+async function reloadPipeline() {
+  const label = currentMode === 'live' ? '实时' : 'Mock';
+  showToast(`运行 ${label} 检测管线...`, 'success');
+  try {
+    const r = await fetch('/api/reload?mode=' + currentMode, { method: 'POST' });
+    const result = await r.json();
+    if (result.status === 'error') {
+      showToast(result.message, 'error');
+      return;
+    }
     showToast(`检测完成: ${result.merged_count} 条告警 (${result.packet_count} 条报文)`, 'success');
     await loadAll();
+    totalAlertsSeen = alerts.length;
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
   } catch(e) { showToast('检测失败: ' + e, 'error'); }
 }
 
@@ -908,10 +1047,12 @@ function renderAlerts() {
 
   // Populate filters
   const catSelect = document.getElementById('filterCategory');
+  const prevCat = catSelect.value;
   catSelect.innerHTML = '<option value="">全部类型</option>' + Object.keys(cats).sort().map(c => `<option value="${c}">${c}</option>`).join('');
+  catSelect.value = prevCat;
 
   // Apply filters
-  const fCat = document.getElementById('filterCategory').value;
+  const fCat = catSelect.value;
   const fSev = document.getElementById('filterSeverity').value;
   const fDet = document.getElementById('filterDetector').value;
   const fSearch = document.getElementById('filterSearch').value.toLowerCase();
@@ -1079,9 +1220,53 @@ function showToast(msg, type) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   Auto-refresh
+   ═══════════════════════════════════════════════════════════════ */
+let autoRefresh = true;
+let refreshInterval = 2000;  // 2s
+let timerId = null;
+let totalAlertsSeen = 0;
+
+function toggleAutoRefresh() {
+  autoRefresh = !autoRefresh;
+  document.getElementById('btnAutoLabel').textContent = autoRefresh ? '暂停' : '运行';
+  document.getElementById('liveDot').style.background = autoRefresh ? '#22c55e' : '#94a3b8';
+  if (autoRefresh) startAutoRefresh();
+  else stopAutoRefresh();
+}
+
+function startAutoRefresh() {
+  if (timerId) return;
+  timerId = setInterval(async () => {
+    await Promise.all([loadAlerts(), loadStats()]);
+    renderAlerts(); renderStats();
+    checkNewAlerts();
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+  }, refreshInterval);
+}
+
+function stopAutoRefresh() {
+  if (timerId) { clearInterval(timerId); timerId = null; }
+}
+
+function checkNewAlerts() {
+  if (alerts.length > totalAlertsSeen) {
+    totalAlertsSeen = alerts.length;
+    // Flash the live dot
+    const dot = document.getElementById('liveDot');
+    dot.style.transform = 'scale(1.8)';
+    setTimeout(() => dot.style.transform = 'scale(1)', 200);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    Init
    ═══════════════════════════════════════════════════════════════ */
-loadAll();
+loadAll().then(() => {
+  totalAlertsSeen = alerts.length;
+  document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+});
+startAutoRefresh();
 </script>
 </body>
 </html>"""

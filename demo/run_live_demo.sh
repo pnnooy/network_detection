@@ -3,12 +3,16 @@
 # 一键启动：靶机服务 + 实时抓包 + 攻击执行 + 检测报告
 #
 # 用法:
-#   sudo bash demo/run_live_demo.sh              # 完整演示
+#   sudo bash demo/run_live_demo.sh              # 完整演示（本机 lo 回环）
 #   sudo bash demo/run_live_demo.sh --quick      # 快速演示（减少攻击次数）
 #   sudo bash demo/run_live_demo.sh --attack-only # 仅攻击（不抓包，用于测试靶机）
 #
+# 跨机器演示（Kali 攻击 Windows）:
+#   sudo TARGET_IP=192.168.xxx.1 CAPTURE_IFACE=eth0 bash demo/run_live_demo.sh
+#
 # 环境要求: Linux (Ubuntu 22.04+) / WSL2 + root 权限
 # 前置安装: pip install scapy
+# 跨机器时: 靶机端需开启 sshd + 防火墙放行端口 8080 和 22
 # ============================================================================
 
 set -e
@@ -16,6 +20,12 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 ATTACK_DIR="$SCRIPT_DIR/attack_scripts"
 RESULTS_DIR="$PROJECT_DIR/results"
+
+# ---- 可配置参数（支持环境变量覆盖） ----
+TARGET_IP="${TARGET_IP:-127.0.0.1}"                # 靶机 IP（跨机器时改为 Windows IP）
+TARGET_HTTP="${TARGET_HTTP:-127.0.0.1:8080}"        # HTTP 靶机地址（含端口）
+CAPTURE_IFACE="${CAPTURE_IFACE:-lo}"                 # 抓包网卡（跨机器时改为 eth0/ens33）
+SKIP_TARGET="${SKIP_TARGET:-0}"                      # 跨机器时设为 1，跳过本地靶机启动
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -75,18 +85,51 @@ start_target() {
 }
 
 start_capture() {
-    echo -e "${YELLOW}[启动] scapy 实时抓包 (lo 接口, 120s)...${NC}"
+    echo -e "${YELLOW}[启动] scapy 实时抓包 (${CAPTURE_IFACE} 接口, 120s)...${NC}"
 
     # 后台启动抓包，输出到 results/live_capture.json
+    # 用 prn 回调边抓边存——被 kill 时已捕获的报文不会丢失
     python3 -c "
-import json, sys
+import json, sys, signal, os, atexit
 sys.path.insert(0, '$PROJECT_DIR')
-from src.capture.packet_capture import capture_live, save_packets
+from scapy.all import sniff
+from src.capture.protocol_parser import parse_packet
+from src.capture.packet_capture import save_packets
 
-print('[抓包] 开始捕获 lo 接口流量...')
-packets = capture_live(interface='lo', timeout=120, count=0, do_reassemble=False)
-save_packets(packets, '$RESULTS_DIR/live_capture.json')
-print(f'[抓包] 完成: {len(packets)} 条报文')
+out_path = '$RESULTS_DIR/live_capture.json'
+records = []
+count = 0
+
+def save_one(raw_pkt):
+    global count
+    rec = parse_packet(raw_pkt)
+    if rec is not None:
+        records.append(rec)
+    count += 1
+
+def flush():
+    if records:
+        save_packets(records, out_path)
+        print(f'[抓包] 已保存 {len(records)} 条报文 (共捕获 {count} 包)', flush=True)
+
+def on_signal(sig, frame):
+    flush()
+    os._exit(0)
+
+atexit.register(flush)
+for sig in (signal.SIGTERM, signal.SIGINT):
+    try:
+        signal.signal(sig, on_signal)
+    except Exception:
+        pass  # 非主线程可能抛异常
+
+print(f'[抓包] 开始捕获 ${CAPTURE_IFACE} 接口流量...', flush=True)
+try:
+    sniff(iface='${CAPTURE_IFACE}', timeout=120, prn=save_one, store=0)
+except Exception as e:
+    print(f'[抓包] 异常: {e}', flush=True)
+flush()
+print(f'[抓包] 结束: {len(records)} 条报文', flush=True)
 " &
     CAPTURE_PID=$!
     sleep 2
@@ -107,24 +150,34 @@ run_attacks() {
         "$ATTACK_DIR/xss.sh" \
         "$ATTACK_DIR/path_traversal.sh" \
         "$ATTACK_DIR/cmd_injection.sh" \
-        "$ATTACK_dir/webshell.sh" \
+        "$ATTACK_DIR/webshell.sh" \
         "$ATTACK_DIR/trojan.sh" \
-        "$ATTACK_DIR/xxe.sh" \
+        "$ATTACK_DIR/xxe.sh"; do
+
+        if [ -f "$script" ]; then
+            echo ""
+            TARGET="$TARGET_HTTP" bash "$script"
+            sleep "$delay"
+        fi
+    done
+
+    # 端口扫描和 SSH 爆破只需要 IP（不含端口）
+    for script in \
         "$ATTACK_DIR/port_scan.sh" \
         "$ATTACK_DIR/ssh_bruteforce.sh"; do
 
         if [ -f "$script" ]; then
             echo ""
-            TARGET=127.0.0.1:8080 bash "$script"
+            TARGET="$TARGET_IP" bash "$script"
             sleep "$delay"
         fi
     done
 
     # 批量 SYN 包模拟高频连接
     echo ""
-    echo "[高频连接] 开始发送 90 个 SYN 包到 127.0.0.1:8080..."
+    echo "[高频连接] 开始发送 90 个 SYN 包到 ${TARGET_HTTP}..."
     for i in $(seq 1 90); do
-        timeout 0.1 bash -c "echo >/dev/tcp/127.0.0.1/8080" 2>/dev/null
+        timeout 0.1 bash -c "echo >/dev/tcp/${TARGET_HTTP%:*}/${TARGET_HTTP##*:}" 2>/dev/null
     done
     echo "[高频连接] 完成"
 
@@ -190,7 +243,7 @@ case "$MODE" in
         check_deps
         trap cleanup EXIT
         mkdir -p "$RESULTS_DIR"
-        start_target
+        if [ "$SKIP_TARGET" -ne 1 ]; then start_target; fi
         start_capture
         sleep 1
         run_attacks 0.5
@@ -204,7 +257,7 @@ case "$MODE" in
     --attack-only)
         echo -e "${YELLOW}[模式] 仅攻击（测试靶机）${NC}"
         trap cleanup EXIT
-        start_target
+        if [ "$SKIP_TARGET" -ne 1 ]; then start_target; fi
         run_attacks 1
         cleanup
         trap - EXIT
@@ -212,11 +265,15 @@ case "$MODE" in
 
     --full|*)
         echo -e "${YELLOW}[模式] 完整演示${NC}"
+        echo "  靶机: ${TARGET_HTTP} | 抓包: ${CAPTURE_IFACE}"
+        if [ "$SKIP_TARGET" -eq 1 ]; then
+            echo -e "  ${CYAN}跨机器模式 —— 靶机由外部提供${NC}"
+        fi
         check_root
         check_deps
         trap cleanup EXIT
         mkdir -p "$RESULTS_DIR"
-        start_target
+        if [ "$SKIP_TARGET" -ne 1 ]; then start_target; fi
         start_capture
         sleep 2
         run_attacks 1
