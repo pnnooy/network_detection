@@ -125,15 +125,28 @@ def run_detection_pipeline() -> dict:
 # ═══════════════════════════════════════════════════════════════════
 
 class WebGUIHandler(SimpleHTTPRequestHandler):
-    """处理 HTTP 请求：API 端点 + 静态页面。"""
+    """HTTP 请求处理器：API 端点路由 + 静态页面托管。
+
+    API 端点:
+        GET  /api/alerts         — 告警列表
+        GET  /api/signatures     — 特征库规则
+        GET  /api/stats          — 统计概览
+        POST /api/reload         — 重新运行检测管线
+        POST /api/signatures/add — 新增规则
+        POST /api/signatures/delete — 删除规则
+        GET  /                   — Web 面板首页 (HTML)
+    """
 
     def __init__(self, *args, **kwargs):
+        """初始化，设置静态文件根目录为项目根目录。"""
         super().__init__(*args, directory=str(PROJECT_DIR), **kwargs)
 
     def log_message(self, fmt, *args):
+        """重定向 HTTP 请求日志到 Python logging（避免写入 stderr）。"""
         logger.debug(fmt % args)
 
     def _send_json(self, data, status=200):
+        """发送 JSON 响应，自动设置 Content-Type 和 CORS 头。"""
         body = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -143,6 +156,7 @@ class WebGUIHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def _send_html(self, html, status=200):
+        """发送 HTML 页面响应。"""
         data = html.encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -151,6 +165,7 @@ class WebGUIHandler(SimpleHTTPRequestHandler):
         self.wfile.write(data)
 
     def do_GET(self):
+        """路由 GET 请求：API 数据端点 + 首页 HTML。"""
         parsed = urlparse(self.path)
         path = parsed.path
 
@@ -170,6 +185,7 @@ class WebGUIHandler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
+        """路由 POST 请求：重跑管线 / 增删特征规则。"""
         parsed = urlparse(self.path)
         path = parsed.path
         content_len = int(self.headers.get("Content-Length", 0))
@@ -202,6 +218,7 @@ class WebGUIHandler(SimpleHTTPRequestHandler):
         self._send_json({"status": "error", "message": "unknown endpoint"}, 404)
 
     def do_OPTIONS(self):
+        """处理 CORS 预检请求。"""
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
@@ -1071,6 +1088,13 @@ loadAll();
 
 
 def main():
+    """启动 Web 监控面板 HTTP 服务。
+
+    命令行参数:
+        --port  N    监听端口 (默认 8099)
+        --host  HOST 监听地址 (默认 127.0.0.1)
+        --reload     启动时重新运行检测管线
+    """
     parser = argparse.ArgumentParser(description="Web 攻击行为监控面板")
     parser.add_argument("--port", type=int, default=8099, help="监听端口 (默认 8099)")
     parser.add_argument("--host", default="127.0.0.1", help="监听地址 (默认 127.0.0.1)")

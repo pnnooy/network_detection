@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(python -m pytest tests/test_bruteforce.py::TestMockData::test_detects_only_ssh_bruteforce tests/test_signature.py::TestMockData -v --tb=short)",
+      "WebFetch(domain:m-vqa-challenge.github.io)",
+      "Bash(taskkill //f //im python.exe)",
+      "Bash(python main.py --web --web-port 8099)",
+      "Bash(python -m pytest tests/ -q)",
+      "Bash(python scripts/add_seq_to_mock.py)",
+      "Bash(git restore *)"
+    ]
+  }
+}

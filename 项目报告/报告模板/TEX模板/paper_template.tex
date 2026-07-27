@@ -1,0 +1,263 @@
+% IEEE/ACM Conference Paper Template
+% 双栏格式，适用于计算机安全/网络会议论文
+
+\documentclass[10pt,conference]{IEEEtran}
+
+% 基础包
+% 注意：如果使用 pdflatex 编译，保留下面两行；如果使用 xelatex，注释掉
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+% 页面设置
+\usepackage[letterpaper, margin=0.75in]{geometry}
+
+% 超链接设置
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+}
+
+% 定义一些常用命令
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+% ========================================
+% 标题部分
+% ========================================
+\title{Your Paper Title Here: \\
+Make It Descriptive and Clear}
+
+% 作者信息（匿名审稿版本可以注释掉）
+\author{
+\IEEEauthorblockN{First Author\IEEEauthorrefmark{1},
+Second Author\IEEEauthorrefmark{2},
+Third Author\IEEEauthorrefmark{1}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}First Institution\\
+Department Name\\
+City, Country\\
+Email: \{first.author, third.author\}@institution.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Second Institution\\
+Department Name\\
+City, Country\\
+Email: second.author@institution.edu}
+}
+
+\maketitle
+
+% ========================================
+% 摘要
+% ========================================
+\begin{abstract}
+This is the abstract of your paper. The abstract should briefly summarize the contents of the paper in 150--250 words. It should clearly state the problem you are addressing, your approach, key findings, and main contributions. The abstract is typically written last, after you have completed the paper.
+\end{abstract}
+
+% ========================================
+% 关键词（某些会议需要）
+% ========================================
+% \begin{IEEEkeywords}
+% keyword1, keyword2, keyword3, keyword4
+% \end{IEEEkeywords}
+
+% ========================================
+% I. 引言
+% ========================================
+\section{Introduction}
+\label{sec:introduction}
+
+The introduction should motivate the problem and clearly state your contributions. Start with the broader context, then narrow down to the specific problem you are addressing.
+
+\subsection{Motivation}
+Explain why this problem is important and worth solving. Provide context and background that helps readers understand the significance of your work.
+
+\subsection{Problem Statement}
+Clearly define the problem you are addressing. What are the gaps in existing solutions? What challenges need to be overcome?
+
+\subsection{Contributions}
+List your main contributions in a clear, numbered list:
+\begin{itemize}
+    \item \textbf{First contribution:} Brief description of the first major contribution.
+    \item \textbf{Second contribution:} Brief description of the second major contribution.
+    \item \textbf{Third contribution:} Brief description of the third major contribution.
+\end{itemize}
+
+\subsection{Paper Organization}
+The rest of this paper is organized as follows. Section~\ref{sec:background} provides background and related work. Section~\ref{sec:methodology} describes our methodology. Section~\ref{sec:evaluation} presents our evaluation. Section~\ref{sec:discussion} discusses the implications and limitations. Finally, Section~\ref{sec:conclusion} concludes the paper.
+
+% ========================================
+% II. 背景与相关工作
+% ========================================
+\section{Background and Related Work}
+\label{sec:background}
+
+\subsection{Background}
+Provide the necessary background information that readers need to understand your work. Define key terms and concepts.
+
+\subsection{Related Work}
+Discuss prior work related to your research. Compare and contrast your approach with existing solutions. Cite relevant papers~\cite{example1, example2}.
+
+% ========================================
+% III. 方法论/系统设计
+% ========================================
+\section{Methodology}
+\label{sec:methodology}
+
+Describe your approach, system design, or methodology in detail. This section should be substantial and may be divided into multiple subsections.
+
+\subsection{Overview}
+Provide a high-level overview of your approach. Consider including a figure that illustrates the overall architecture or workflow.
+
+% 取消注释下面的代码来插入图片（需要先将图片放在 figures/ 目录中）
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=0.9\columnwidth]{figures/system_overview.pdf}
+%     \caption{System overview showing the main components and their interactions.}
+%     \label{fig:overview}
+% \end{figure}
+
+\subsection{Component A}
+Describe the first major component of your system or methodology.
+
+\subsection{Component B}
+Describe the second major component.
+
+\subsection{Component C}
+Describe additional components as needed.
+
+% ========================================
+% IV. 实现
+% ========================================
+\section{Implementation}
+\label{sec:implementation}
+
+Describe implementation details, including:
+\begin{itemize}
+    \item Programming languages and frameworks used
+    \item Hardware/software requirements
+    \item Key implementation challenges and solutions
+\end{itemize}
+
+% ========================================
+% V. 评估/实验
+% ========================================
+\section{Evaluation}
+\label{sec:evaluation}
+
+Present your experimental results and evaluation.
+
+\subsection{Experimental Setup}
+Describe your experimental methodology:
+\begin{itemize}
+    \item Dataset description
+    \item Evaluation metrics
+    \item Baseline comparisons
+    \item Experimental environment
+\end{itemize}
+
+\subsection{Results}
+Present your main results. Use tables and figures to clearly communicate your findings.
+
+\begin{table}[t]
+\centering
+\caption{Performance comparison of different approaches}
+\label{tab:performance}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Method & Metric 1 & Metric 2 & Metric 3 \\
+\midrule
+Baseline 1 & 85.2\% & 12.3ms & 95.1\% \\
+Baseline 2 & 87.5\% & 10.8ms & 96.2\% \\
+\textbf{Our Approach} & \textbf{92.3\%} & \textbf{8.5ms} & \textbf{98.7\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Analysis}
+Analyze and interpret your results. What do the results tell us? How do they support your claims?
+
+% ========================================
+% VI. 讨论
+% ========================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Implications}
+Discuss the broader implications of your findings.
+
+\subsection{Limitations}
+Be honest about the limitations of your approach. What are the constraints or assumptions? What scenarios does your solution not handle well?
+
+\subsection{Future Work}
+Suggest directions for future research building on your work.
+
+% ========================================
+% VII. 对策/安全考量（如适用）
+% ========================================
+\section{Countermeasures}
+\label{sec:countermeasures}
+
+If your paper discusses attacks or vulnerabilities, include a section on potential countermeasures or defenses.
+
+% ========================================
+% VIII. 相关工作（可选，如果与背景合并）
+% ========================================
+% \section{Related Work}
+% \label{sec:related}
+%
+% More detailed discussion of related work, if not covered in Section~\ref{sec:background}.
+
+% ========================================
+% IX. 结论
+% ========================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+Summarize your main findings and contributions. Reiterate why your work is important and what impact it may have. Keep this section concise.
+
+% ========================================
+% 致谢（可选）
+% ========================================
+\section*{Acknowledgments}
+We thank the anonymous reviewers for their valuable feedback. This work was supported by [funding source].
+
+% ========================================
+% 参考文献
+% ========================================
+\bibliographystyle{IEEEtran}
+% 使用 .bib 文件（取消注释下面这行，并确保 references.bib 文件存在）
+% \bibliography{references}
+
+% 手动输入参考文献（示例）
+\begin{thebibliography}{99}
+\bibitem{example1}
+A. Author, B. Author, and C. Author,
+``Title of the paper,''
+in \textit{Proceedings of Conference Name},
+2024, pp. 1--10.
+
+\bibitem{example2}
+D. Author and E. Author,
+``Another paper title,''
+\textit{Journal Name},
+vol. 10, no. 2, pp. 100--120,
+2023.
+\end{thebibliography}
+
+\end{document}

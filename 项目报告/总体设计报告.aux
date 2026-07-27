@@ -1,0 +1,96 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\HyPL@Entry{1<</S/R>>}
+\HyPL@Entry{3<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {1}系统需求分析}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}安全需求}{1}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.1}已知 Web 攻击识别}{1}{subsubsection.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.2}暴力破解行为发现}{1}{subsubsection.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.3}网络扫描与横向扩散识别}{1}{subsubsection.1.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.4}异常外联与 C2 通信检测}{1}{subsubsection.1.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}具体功能要求}{1}{subsection.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces 系统功能模块划分}}{2}{table.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:modules}{{1}{2}{系统功能模块划分}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}开发平台要求}{2}{subsection.1.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces 开发平台选型}}{2}{table.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}运行环境要求}{2}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}计划进度安排}{3}{section.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces 项目进度表}}{3}{table.caption.4}\protected@file@percent }
+\newlabel{tab:schedule}{{3}{3}{项目进度表}{table.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 项目开发甘特图}}{4}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:gantt}{{1}{4}{项目开发甘特图}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}系统总体架构}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}平台架构}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces 四层架构各层职责}}{4}{table.caption.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 系统四层平台架构}}{5}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:platform}{{2}{5}{系统四层平台架构}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}功能架构与数据流}{6}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 系统数据流全景图}}{6}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:dataflow}{{3}{6}{系统数据流全景图}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}系统功能模块一：数据捕获与协议解析（李哲）}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}模块结构与调用关系}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces capture 模块内部调用关系}}{7}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:capture}{{4}{7}{capture 模块内部调用关系}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}报文捕获子模块（packet\_capture.py）}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}协议解析与流重组子模块}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces parse\_packet 协议栈解析流程}}{8}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:parse}{{5}{8}{parse\_packet 协议栈解析流程}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Mock 数据生成器（mock\_generator.py）}{9}{subsection.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Mock 数据场景覆盖对照表}}{9}{table.caption.11}\protected@file@percent }
+\newlabel{tab:mock}{{5}{9}{Mock 数据场景覆盖对照表}{table.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}系统功能模块二：特征行为检测引擎（曾子恒）}{10}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}模块结构}{10}{subsection.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces signature 模块结构与数据流}}{10}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:sig-module}{{6}{10}{signature 模块结构与数据流}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}特征库管理（signature\_db.py）}{10}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}匹配引擎（matcher.py）}{10}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}系统功能模块三：暴力破解检测模块（陈志恒）}{11}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}模块结构}{11}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}连接尝试收集（\_collect\_attempts）}{11}{subsection.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \_collect\_attempts 连接尝试收集流程}}{11}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:bf-collect}{{7}{11}{\_collect\_attempts 连接尝试收集流程}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}滑动窗口密度统计（\_max\_count\_in\_window）}{12}{subsection.6.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces 双指针滑动窗口算法}}{13}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:sliding}{{8}{13}{双指针滑动窗口算法}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}告警产出}{14}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}系统功能模块四：异常行为检测模块（姜新晨）}{14}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}模块结构}{14}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}基线配置（baseline.py）}{14}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}端口扫描检测}{15}{subsection.7.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces 端口扫描检测流程}}{15}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:scan}{{9}{15}{端口扫描检测流程}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}异常外联检测}{15}{subsection.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 异常外联检测流程}}{16}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:external}{{10}{16}{异常外联检测流程}{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}系统功能模块五：告警汇总与监控GUI（韩宇飞）}{16}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}模块结构}{16}{subsection.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces aggregator + GUI 模块结构与数据流}}{17}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:agg-module}{{11}{17}{aggregator + GUI 模块结构与数据流}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}行为关联汇总（aggregator.py）}{17}{subsection.8.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces correlate\_behaviors 行为关联算法}}{18}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:correlate}{{12}{18}{correlate\_behaviors 行为关联算法}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}图形监控界面（gui.py）}{19}{subsection.8.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces GUI 三页签结构}}{19}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:gui}{{13}{19}{GUI 三页签结构}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}接口设计}{20}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}报文记录格式（Packet Record）}{20}{subsection.9.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Packet Record 字段定义}}{21}{table.caption.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}统一告警格式（Alert Record）}{21}{subsection.9.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Alert Record 字段定义}}{22}{table.caption.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}统一函数签名}{22}{subsection.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}统一日志规范}{22}{subsection.9.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}开发平台}{23}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}软件平台}{23}{subsection.10.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces 软件平台选型}}{23}{table.caption.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}硬件平台}{23}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}系统出错处理}{24}{section.11}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces 异常场景与处理策略}}{24}{table.caption.23}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces 系统出错处理决策树}}{24}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:error}{{14}{24}{系统出错处理决策树}{figure.caption.24}{}}
+\newlabel{LastPage}{{11}{24}{系统出错处理}{page.24}{}}
+\gdef\lastpage@lastpage{24}
+\gdef\lastpage@lastpageHy{24}
+\gdef \@abspage@last{27}

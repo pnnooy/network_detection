@@ -70,7 +70,8 @@ def _match_signature(payload: str, protocol: str, signatures: list[dict]):
     return None
 
 
-def _parse_timestamp(ts: str):
+def _parse_timestamp(ts: str) -> datetime | None:
+    """解析 ISO8601 时间戳，兼容 Z 后缀。解析失败返回 None。"""
     try:
         return datetime.fromisoformat(ts.replace("Z", "+00:00"))
     except (TypeError, ValueError):

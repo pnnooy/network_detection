@@ -45,6 +45,28 @@
 | **依赖安装** | `pip install -r requirements.txt` |
 | **代码格式化** | 推荐使用 `black` + `isort` 统一风格（可选但强烈建议） |
 
+### 2.1 快速开始（3 条命令跑通全链路）
+
+```bash
+# 1. 安装依赖（仅需一次）
+pip install -r requirements.txt
+
+# 2. 运行检测管线（mock 数据 → 30 条告警）
+python main.py --input mock_data/mock_packets.json
+
+# 3. 启动 Web 监控面板（浏览器访问 http://127.0.0.1:8099）
+python main.py --web
+```
+
+其他启动方式：
+
+```bash
+python main.py --gui-only                              # tkinter 桌面版 GUI
+python -m pytest tests/ -v                             # 运行全量测试 (157 passed)
+sudo bash demo/run_live_demo.sh                        # Linux 真实攻击演示（需 root）
+python scripts/add_seq_to_mock.py                      # 为 mock 数据注入 TCP 序列号
+```
+
 ---
 
 ## 三、项目成员与分工
@@ -170,12 +192,12 @@ network_detection/
 
 | 模块 | 测试文件 | 测试数 | 覆盖范围 |
 |---|---|---|---|
-| capture | `test_capture.py` | 20 | TCP 重组、协议解析、mock 格式合规 |
+| capture | `test_capture.py` | 24 | TCP v1/v2 重组、seq乱序/重传/间隙检测、协议解析、mock 格式合规 |
 | signature | `test_signature.py` | 38 | SQL注入/XSS/木马/恶意命令 检出、协议过滤、窗口聚合、mock 端到端 |
 | bruteforce | `test_bruteforce.py` | 25 | 滑动窗口统计、SYN/RST 计数、阈值可配、mock 端到端 |
 | anomaly | `test_anomaly.py` | 45 | 端口扫描/异常外联/横向扩散/高频连接 检出、告警格式、mock 端到端 |
-| gui + aggregator | `test_gui_aggregator.py` | 20 | 行为关联、去重排序、GUI 组件 |
-| **合计** | | **148** | **全部通过，2 跳过（环境依赖）** |
+| gui + aggregator | `test_gui_aggregator.py` | 25 | 行为关联、跨检测器协同、攻击链识别、严重度升级、GUI 组件 |
+| **合计** | | **157** | **全部通过，2 跳过（环境依赖）** |
 
 > 运行全量测试：`python -m pytest tests/ -v`
 
@@ -328,7 +350,7 @@ git push origin feature/signature-engine
 | **缓冲** | 应对意外问题 | 8/3(一) ~ 8/4(二) | — |
 | **📅 官方截止** | 结题报告提交截止 | 8/5(三) | — |
 
-> **Phase 3 完成 + Phase 4 启动**（7/22 晚）：mock 数据扩充至 426 条 / 特征规则 27 条 / 30 条行为告警 / 全量 148 测试全绿。Web 监控面板上线 (`python main.py --web`)。真实攻击演示脚本已就绪 (`demo/`)，7/23-7/25 韩宇飞进行靶机验证。
+> **Phase 3 完成 + Phase 4 启动**（7/22 晚）：mock 数据扩充至 426 条 / 特征规则 27 条 / 30 条行为告警 / 全量 157 测试全绿。Web 监控面板上线 (`python main.py --web`)。真实攻击演示脚本已就绪 (`demo/`)，7/23-7/25 韩宇飞进行靶机验证。
 
 ### Commit message 规范
 
@@ -352,7 +374,7 @@ git push origin feature/signature-engine
 
 1. 各自在 feature 分支完成核心逻辑后，发起 Pull Request 到 `main`
 2. 组长（韩宇飞）完成 Code Review，修复问题后合并
-3. **✅ Phase1~3 全部完成**：5 人全部模块已合入 main，148 测试全绿
+3. **✅ Phase1~3 全部完成**：5 人全部模块已合入 main，157 测试全绿
 4. **Phase 4 联调**（7/23 周四起）：
    - **Mock 数据全链路**已跑通：426 条报文 → 27 条规则 → 30 条行为告警（signature 16 + bruteforce 3 + anomaly 11）
    - **Web 监控面板**已上线：`python main.py --web` 启动，M-VQA 同款视觉风格，浏览器访问 `http://127.0.0.1:8099`

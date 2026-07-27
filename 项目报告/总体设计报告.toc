@@ -1,0 +1,45 @@
+\contentsline {section}{\numberline {1}系统需求分析}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}安全需求}{1}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}已知 Web 攻击识别}{1}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}暴力破解行为发现}{1}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}网络扫描与横向扩散识别}{1}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}异常外联与 C2 通信检测}{1}{subsubsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.2}具体功能要求}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}开发平台要求}{2}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}运行环境要求}{2}{subsection.1.4}%
+\contentsline {section}{\numberline {2}计划进度安排}{3}{section.2}%
+\contentsline {section}{\numberline {3}系统总体架构}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}平台架构}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}功能架构与数据流}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {4}系统功能模块一：数据捕获与协议解析（李哲）}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}模块结构与调用关系}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}报文捕获子模块（packet\_capture.py）}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}协议解析与流重组子模块}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Mock 数据生成器（mock\_generator.py）}{9}{subsection.4.4}%
+\contentsline {section}{\numberline {5}系统功能模块二：特征行为检测引擎（曾子恒）}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}模块结构}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}特征库管理（signature\_db.py）}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}匹配引擎（matcher.py）}{10}{subsection.5.3}%
+\contentsline {section}{\numberline {6}系统功能模块三：暴力破解检测模块（陈志恒）}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}模块结构}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}连接尝试收集（\_collect\_attempts）}{11}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}滑动窗口密度统计（\_max\_count\_in\_window）}{12}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}告警产出}{14}{subsection.6.4}%
+\contentsline {section}{\numberline {7}系统功能模块四：异常行为检测模块（姜新晨）}{14}{section.7}%
+\contentsline {subsection}{\numberline {7.1}模块结构}{14}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}基线配置（baseline.py）}{14}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}端口扫描检测}{15}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}异常外联检测}{15}{subsection.7.4}%
+\contentsline {section}{\numberline {8}系统功能模块五：告警汇总与监控GUI（韩宇飞）}{16}{section.8}%
+\contentsline {subsection}{\numberline {8.1}模块结构}{16}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}行为关联汇总（aggregator.py）}{17}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}图形监控界面（gui.py）}{19}{subsection.8.3}%
+\contentsline {section}{\numberline {9}接口设计}{20}{section.9}%
+\contentsline {subsection}{\numberline {9.1}报文记录格式（Packet Record）}{20}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}统一告警格式（Alert Record）}{21}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}统一函数签名}{22}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}统一日志规范}{22}{subsection.9.4}%
+\contentsline {section}{\numberline {10}开发平台}{23}{section.10}%
+\contentsline {subsection}{\numberline {10.1}软件平台}{23}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}硬件平台}{23}{subsection.10.2}%
+\contentsline {section}{\numberline {11}系统出错处理}{24}{section.11}%

@@ -162,6 +162,7 @@ def _parse_ip_packet(ip_layer, timestamp: str) -> dict | None:
         src_port = int(transport.sport)
         dst_port = int(transport.dport)
         flags = _format_tcp_flags(transport)
+        # 注意: TCP 初始 SYN 的 seq 可能为 0，必须用 is not None 而非 truthiness
         tcp_seq = int(transport.seq) if transport.seq is not None else None
         tcp_ack = int(transport.ack) if transport.ack is not None else None
         raw_payload = bytes(transport.payload) if transport.payload else b""

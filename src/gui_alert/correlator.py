@@ -38,19 +38,16 @@ STAGE_MAP: dict[tuple[str, str], str] = {
     # Reconnaissance 侦察阶段
     ("anomaly", "端口扫描"): "reconnaissance",
     ("anomaly", "异常高频连接"): "reconnaissance",
-    # Exploitation 利用阶段
+    # Exploitation 利用阶段（payload 注入类攻击）
     ("signature", "SQL注入"): "exploitation",
     ("signature", "XSS"): "exploitation",
-    ("signature", "木马通信"): "exploitation",
     ("signature", "恶意命令"): "exploitation",
-    ("signature", "Webshell"): "exploitation",
     ("signature", "路径遍历"): "exploitation",
     ("signature", "命令注入"): "exploitation",
     ("signature", "XXE注入"): "exploitation",
     ("signature", "DNS隧道"): "exploitation",
     ("signature", "SMB漏洞利用"): "exploitation",
-    ("bruteforce", "暴力破解/非法登录"): "credential_access",
-    # Installation 植入阶段
+    # Installation 植入阶段（后门/持久化，排在 exploitation 之后以覆盖同类别更危险阶段）
     ("signature", "Webshell"): "installation",
     ("signature", "木马通信"): "installation",
     # Command & Control 控制阶段

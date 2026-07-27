@@ -68,18 +68,22 @@ def _has_seq_fields(packet: dict) -> bool:
 
 
 def _is_syn(packet: dict) -> bool:
+    """判断报文是否为 SYN 包（含 SYN 标志但非 SYN+ACK）。"""
     return "S" in (packet.get("flags") or "")
 
 
 def _is_data(packet: dict) -> bool:
+    """判断报文是否携带应用层数据。"""
     return (packet.get("payload_len") or 0) > 0
 
 
 def _tcp_seq(packet: dict) -> int:
+    """安全提取 TCP 序列号，缺失时返回 0。"""
     return int(packet.get("tcp_seq", 0))
 
 
 def _tcp_ack(packet: dict) -> int:
+    """安全提取 TCP 确认号，缺失时返回 0。"""
     return int(packet.get("tcp_ack", 0))
 
 
@@ -145,11 +149,10 @@ def _reassemble_flow_with_seq(flow_packets: list[dict]) -> list[dict]:
             continue
 
         direction = pkt.get("direction")
-        state = client_state if direction == "request" else server_state
-        if direction == "response":
-            state = server_state
-        elif direction == "request":
+        if direction == "request":
             state = client_state
+        elif direction == "response":
+            state = server_state
         else:
             # 无法判定方向 → 控制包保留，数据包按原样保留
             if _is_data(pkt):
@@ -286,7 +289,7 @@ def _process_data_segment(state: DirectionState, seg: TCPSegment, output: list[d
 
 
 def _emit_data(state: DirectionState, seg: TCPSegment, output: list[dict]):
-    """输出一个数据段并更新期望序列号。"""
+    """将数据段追加到输出列表，并推进该方向的 expected_seq。"""
     state.next_seq = (seg.seq + seg.payload_len) & 0xFFFFFFFF
     state.total_bytes += seg.payload_len
 

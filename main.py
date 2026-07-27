@@ -103,6 +103,7 @@ def main():
     if args.web:
         from src.gui_alert.web_gui import main as web_main
 
+        # 将端口参数传递给 web_gui 的 CLI 解析器
         sys.argv = ["web_gui", "--port", str(args.web_port)]
         web_main()
         return

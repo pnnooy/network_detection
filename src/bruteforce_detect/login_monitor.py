@@ -136,10 +136,9 @@ def _collect_attempts(
             continue
 
         protocol = pkt.get("protocol")
-        # 暴力破解基于面向连接的 TCP；协议缺失时也放行由后续 flags 判断
+        # 暴力破解仅检测 TCP 连接尝试；非 TCP 协议直接跳过
         if protocol not in (None, "TCP"):
-            # 记录 RST 拒绝响应（可能出现在其它协议判断之外，但通常为 TCP）
-            pass
+            continue
 
         src_ip = pkt.get("src_ip")
         dst_ip = pkt.get("dst_ip")
@@ -268,7 +267,7 @@ def detect(
 
 
 def _load_packets(input_path: str) -> list[dict]:
-    """从 JSON 文件加载报文列表，异常时记录日志并返回空列表。"""
+    """CLI 模式：从 JSON 文件加载报文列表，异常时记录日志并返回空列表。"""
     path = Path(input_path)
     if not path.exists():
         logger.warning("输入文件不存在: %s", input_path)
