@@ -114,6 +114,8 @@ python -m src.signature_engine.matcher --input mock_data/mock_packets.json --out
 
 > **前置条件较多，适合有 VMware/Linux 双机环境的同学深入验证。如仅评估检测逻辑与系统功能，Mock 复现（§2.2）已覆盖全部代码路径。**
 >
+> **不想搭建双机环境？** 观看 [演示视频](https://pan.sjtu.edu.cn/web/share/8dd21efb9462cce3a27ec8c6ec1aecff)（10 分钟，含 Mock 全链路 + 跨机器实时攻击完整流程）。
+>
 > 核心思路：一台机器运行靶机服务 + 抓包 + 检测管线（受害者），另一台机器执行 9 类攻击脚本（攻击者），Web 面板实时展示检出告警。
 
 #### 2.3.1 架构说明
