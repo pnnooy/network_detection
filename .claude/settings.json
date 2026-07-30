@@ -52,7 +52,12 @@
       "Bash(xxd)",
       "Bash(rm -f results/*.json results/*.tmp)",
       "Bash(mkdir -p results)",
-      "Bash(python -c \"import py_compile; py_compile.compile\\('main.py', doraise=True\\); print\\('OK'\\)\")"
+      "Bash(python -c \"import py_compile; py_compile.compile\\('main.py', doraise=True\\); print\\('OK'\\)\")",
+      "Bash(grep -E \"\\\\.pyc$|__pycache__|\\\\.pytest_cache\")",
+      "Bash(grep -E \"start$\")",
+      "Bash(grep -v -E \"\\\\.py$|\\\\.md$|\\\\.json$|\\\\.txt$|\\\\.sh$|\\\\.bat$|\\\\.ps1$|\\\\.pdf$|\\\\.pptx$|\\\\.tex$|\\\\.bib$|\\\\.cfg$|\\\\.toml|\\\\.yml|\\\\.yaml|\\\\.gitignore|\\\\.gitkeep|\\\\.png$|\\\\.zip$|__init__|requirements\")",
+      "Bash(grep -v \"\\\\.aux$\\\\|\\\\.out$\\\\|\\\\.log$\\\\|\\\\.toc$\\\\|\\\\.synctex\")",
+      "Bash(grep -E \"\\\\.aux$|\\\\.out$|\\\\.toc$|\\\\.log$|\\\\.synctex\")"
     ]
   }
 }
